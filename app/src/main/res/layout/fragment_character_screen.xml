@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/character">
+
+
+    <Button
+        android:id="@+id/room_create_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="방만들기"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/find_room"
+        app:layout_constraintTop_toBottomOf="@+id/character_img" />
+
+    <ImageView
+        android:id="@+id/character_img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="200dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/character" />
+
+    <Button
+        android:id="@+id/find_room"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="방찾기"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/memory"
+        app:layout_constraintLeft_toRightOf="@+id/room_create_button"
+        app:layout_constraintTop_toBottomOf="@+id/character_img" />
+
+    <Button
+        android:id="@+id/memory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="추억찾기"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/character_img"
+        app:layout_constraintLeft_toRightOf="@+id/find_room"/>
+
+    <LinearLayout
+        android:id="@+id/colorbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/character_img">
+
+        <Button
+            android:id="@+id/red_button"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            app:backgroundTint="#F44336" />
+
+        <Button
+            android:id="@+id/yellow_button"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            app:backgroundTint="#FFEB3B" />
+
+        <Button
+            android:id="@+id/green_button"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            app:backgroundTint="#42FF3B" />
+
+        <Button
+            android:id="@+id/blue_button"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            app:backgroundTint="#3B4FFF" />
+
+        <Button
+            android:id="@+id/purple_button"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            app:backgroundTint="#D505CA" />
+
+        <Button
+            android:id="@+id/black_button"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            app:backgroundTint="#020202" />
+
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
