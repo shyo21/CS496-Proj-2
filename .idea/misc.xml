@@ -3,7 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/heyin/AndroidStudioProjects/cse496_project2/app/src/main/res/layout/activity_game.xml" value="0.12685185185185185" />
+        <entry key="..\:/Users/heyin/AndroidStudioProjects/cse496_project2/app/src/main/res/layout/activity_main.xml" value="0.12685185185185185" />
         <entry key="..\:/Users/heyin/AndroidStudioProjects/cse496_project2/app/src/main/res/layout/fragment_character_screen.xml" value="0.36614583333333334" />
+        <entry key="..\:/Users/heyin/AndroidStudioProjects/cse496_project2/app/src/main/res/layout/fragment_game_screen.xml" value="0.36614583333333334" />
+        <entry key="..\:/Users/heyin/AndroidStudioProjects/cse496_project2/app/src/main/res/layout/fragment_result_screen.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/heyin/AndroidStudioProjects/cse496_project2/app/src/main/res/layout/fragment_room_screen.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/heyin/AndroidStudioProjects/cse496_project2/app/src/main/res/layout/playerlist.xml" value="0.36614583333333334" />
       </map>

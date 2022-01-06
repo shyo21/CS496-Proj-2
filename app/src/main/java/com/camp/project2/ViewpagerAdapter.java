@@ -23,9 +23,7 @@ public class ViewpagerAdapter extends FragmentStatePagerAdapter {
         super(fm);
     }
 
-    public void additem(Fragment item){
-        items.add(item);
-    }
+    public void addItem(Fragment item){ items.add(item); }
 
     @Override
     public Fragment getItem(int position){

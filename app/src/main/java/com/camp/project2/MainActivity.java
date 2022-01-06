@@ -41,8 +41,8 @@ public class MainActivity extends AppCompatActivity {
         Character_screen c_screen = new Character_screen();
         Room_screen r_screen = new Room_screen();
 
-        viewpagerAdapter.additem(c_screen);
-        viewpagerAdapter.additem(r_screen);
+        viewpagerAdapter.addItem(c_screen);
+        viewpagerAdapter.addItem(r_screen);
 
         viewPager.setAdapter(viewpagerAdapter);
     }

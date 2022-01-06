@@ -1,5 +1,6 @@
 package com.camp.project2;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 
@@ -13,6 +14,7 @@ import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -30,6 +32,7 @@ public class Room_screen extends Fragment {
     RecyclerView playerList;
     String text;
     ArrayList<Integer> displaySize;
+    Button startButton;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -42,6 +45,7 @@ public class Room_screen extends Fragment {
         myView = inflater.inflate(R.layout.fragment_room_screen, container, false);
         qrCode = myView.findViewById(R.id.qrCode);
         playerList = myView.findViewById(R.id.playerList);
+        startButton = myView.findViewById(R.id.startButton);
 
         displaySize = getDisplaySize();
         int displayWidth = displaySize.get(0);
@@ -52,7 +56,7 @@ public class Room_screen extends Fragment {
 
         ArrayList<String> list = new ArrayList<>();
         for (int i=0; i<100; i++) {
-            list.add(i, String.format("TEXT %d", i)) ;
+            list.add(i, String.format("TEXT %d", i));
         }
 
         playerList.setHasFixedSize(true);
@@ -71,6 +75,14 @@ public class Room_screen extends Fragment {
         } catch (WriterException e) {
             e.printStackTrace();
         }
+
+        startButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), GameActivity.class);
+                startActivity(intent);
+            }
+        });
 
         return myView;
     }
