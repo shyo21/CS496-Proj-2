@@ -14,7 +14,7 @@ public class GameActivity extends AppCompatActivity {
         setContentView(R.layout.activity_game);
 
         viewPager = findViewById(R.id.viewpager);
-        viewPager.setPagingEnabled(false);
+        viewPager.setPagingEnabled(true);
         ViewpagerAdapter viewpagerAdapter = new ViewpagerAdapter(getSupportFragmentManager());
 
         Game_screen g_screen = new Game_screen();
