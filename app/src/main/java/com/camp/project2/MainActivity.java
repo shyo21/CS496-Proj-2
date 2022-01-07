@@ -45,5 +45,11 @@ public class MainActivity extends AppCompatActivity {
         viewpagerAdapter.addItem(r_screen);
 
         viewPager.setAdapter(viewpagerAdapter);
+
+    }
+
+    @Override
+    public void onBackPressed(){//액티비티에서 동작.
+        viewPager.setCurrentItem(0);
     }
 }
