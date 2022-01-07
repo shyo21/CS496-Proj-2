@@ -1,20 +1,23 @@
 package com.camp.project2;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.os.Handler;
+import android.os.CountDownTimer;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.LinearSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.Collections;
+import java.util.Objects;
 
 public class Result_screen extends Fragment {
 
@@ -27,6 +30,7 @@ public class Result_screen extends Fragment {
         super.onCreate(savedInstanceState);
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -34,10 +38,18 @@ public class Result_screen extends Fragment {
         roulette = myView.findViewById(R.id.roulette);
         button = myView.findViewById(R.id.button);
 
+        setRouletteView(roulette);
+        button.setOnClickListener(view -> setRouletteAction(roulette));
+
+        return myView;
+    }
+
+    private void setRouletteView(RecyclerView roulette) {
         ArrayList<String> list = new ArrayList<>();
-        for (int i=0; i<100; i++) {
+        for (int i = 0; i < 100; i++) {
             list.add(i, String.format("TEXT %d", i));
         }
+        Collections.shuffle(list);
 
         roulette.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(myView.getContext());
@@ -47,28 +59,63 @@ public class Result_screen extends Fragment {
         LinearSnapHelper linearSnapHelper = new LinearSnapHelper();
         linearSnapHelper.attachToRecyclerView(roulette);
 
-        button.setOnClickListener(new View.OnClickListener() {
+        roulette.addOnItemTouchListener(new RecyclerView.SimpleOnItemTouchListener() {
             @Override
-            public void onClick(View view) {
-                int time = 40;
-                final Timer timer = new Timer();
-                timer.schedule(new TimerTask() {
-                    @Override
-                    public void run() {
-                        if (linearLayoutManager.findLastCompletelyVisibleItemPosition() < (adapter.getItemCount() - 1)) {
-
-                            linearLayoutManager.smoothScrollToPosition(roulette, new RecyclerView.State(), linearLayoutManager.findLastCompletelyVisibleItemPosition() + 1);
-                        }
-
-                        else if (linearLayoutManager.findLastCompletelyVisibleItemPosition() == (adapter.getItemCount() - 1)) {
-
-                            linearLayoutManager.smoothScrollToPosition(roulette, new RecyclerView.State(), 0);
-                        }
-                    }
-                }, 0, time);
-            }
+            public boolean onInterceptTouchEvent(@NonNull RecyclerView rv, @NonNull MotionEvent e) { return true; }
         });
+    }
 
-        return myView;
+    private void setRouletteAction(RecyclerView roulette) {
+        recursiveTimer(roulette,2000,30).start();
+    }
+
+    private CountDownTimer recursiveTimer(RecyclerView roulette, Integer duration, Integer interval) {
+        LinearLayoutManager linearLayoutManager = (LinearLayoutManager) roulette.getLayoutManager();
+        recyclerAdapter adapter = (recyclerAdapter) roulette.getAdapter();
+        if(duration == 2000) { duration -= 1000; }
+
+        if (interval <= 400) {
+            Integer finalDuration = duration;
+            return new CountDownTimer(finalDuration, interval) {
+                @Override
+                public void onTick(long l) {
+                    if (Objects.requireNonNull(linearLayoutManager).findLastCompletelyVisibleItemPosition() < (Objects.requireNonNull(adapter).getItemCount() - 1)) {
+                        linearLayoutManager.smoothScrollToPosition(roulette, new RecyclerView.State(), linearLayoutManager.findLastCompletelyVisibleItemPosition() + 1);
+                    } else if (linearLayoutManager.findLastCompletelyVisibleItemPosition() == (adapter.getItemCount() - 1)) {
+                        linearLayoutManager.smoothScrollToPosition(roulette, new RecyclerView.State(), 0);
+                    }
+                }
+
+                @Override
+                public void onFinish() {
+                    recursiveTimer(roulette, finalDuration, interval + 100).start();
+                }
+            };
+        } else if (interval <= 600){
+            Integer finalDuration1 = duration;
+            return new CountDownTimer(finalDuration1, interval) {
+                @Override
+                public void onTick(long l) {
+                    if (Objects.requireNonNull(linearLayoutManager).findLastCompletelyVisibleItemPosition() < (Objects.requireNonNull(adapter).getItemCount() - 1)) {
+                        linearLayoutManager.smoothScrollToPosition(roulette, new RecyclerView.State(), linearLayoutManager.findLastCompletelyVisibleItemPosition() + 1);
+                    } else if (linearLayoutManager.findLastCompletelyVisibleItemPosition() == (adapter.getItemCount() - 1)) {
+                        linearLayoutManager.smoothScrollToPosition(roulette, new RecyclerView.State(), 0);
+                    }
+                }
+
+                @Override
+                public void onFinish() {
+                    recursiveTimer(roulette, finalDuration1, interval + 400).start();
+                }
+            };
+        } else {
+            return new CountDownTimer(0, 0) {
+                @Override
+                public void onTick(long l) { }
+
+                @Override
+                public void onFinish() { }
+            };
+        }
     }
 }
