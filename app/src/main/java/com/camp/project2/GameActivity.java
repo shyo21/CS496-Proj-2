@@ -1,5 +1,6 @@
 package com.camp.project2;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -16,6 +17,7 @@ public class GameActivity extends AppCompatActivity {
     public Result_screen r_screen;
     public static Handler mHandler;
     public Thread watch_thread;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +35,18 @@ public class GameActivity extends AppCompatActivity {
 
         viewPager.setAdapter(viewpagerAdapter);
 
+        mHandler =new Handler();
+
+        final Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                Calendar cal = Calendar.getInstance();
+                SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+                String strTime = sdf.format(cal.getTime());
+                g_screen.stopwatch.setText(strTime);
+            }
+        };
+
         class NewRunnable implements Runnable {
             @Override
             public void run(){
@@ -42,21 +56,11 @@ public class GameActivity extends AppCompatActivity {
                     }catch (Exception e){
                         e.printStackTrace();
                     }
-                    mHandler.sendEmptyMessage(0);
+                    mHandler.post(runnable);
                 }
             }
         }
-        mHandler =new Handler() { //이벤트가 발생했을 때 호출되는 함
-            @Override
-            public void handleMessage (Message msg){
-                System.out.println("handler enter");
-                Calendar cal = Calendar.getInstance();
-                SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
-                String strtime = sdf.format(cal.getTime());
-                System.out.println(strtime);
-                g_screen.stopwatch.setText(strtime);
-            }
-        };
+
         NewRunnable nr = new NewRunnable();
         watch_thread = new Thread(nr);
     }

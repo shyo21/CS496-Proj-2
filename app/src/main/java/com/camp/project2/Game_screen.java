@@ -8,27 +8,23 @@ import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
+import java.util.Objects;
+
 public class Game_screen extends Fragment {
     public TextView stopwatch;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+        View myView = inflater.inflate(R.layout.fragment_game_screen, container, false);
+        stopwatch = myView.findViewById(R.id.stopwatch_textview);
+        ((GameActivity) requireActivity()).watch_thread.start();
 
-        ViewGroup viewGroup = (ViewGroup) inflater.inflate(R.layout.fragment_game_screen, container, false);
-        stopwatch = viewGroup.findViewById(R.id.stopwatch_textview);
-        ((GameActivity)getActivity()).watch_thread.start();
-        System.out.println("Thread start");
-
-        //ddd
-
-        return viewGroup;
+        return myView;
     }
 }
