@@ -11,7 +11,7 @@
         android:layout_height="30dp"
         android:layout_marginTop="349dp"
         android:layout_marginBottom="172dp"
-        android:nestedScrollingEnabled="true"
+        android:nestedScrollingEnabled="false"
         app:layout_constraintBottom_toTopOf="@+id/button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
