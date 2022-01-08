@@ -1,6 +1,5 @@
 package com.camp.project2;
 
-import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
 
@@ -25,12 +24,12 @@ public class Character_screen extends Fragment implements View.OnClickListener {
     private TextView testview;
     private ImageView characterview;
 
-    MainActivity activity;
+    InitialActivity activity;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // Inflate the layout for this fragment
-        activity = (MainActivity)getActivity();
+        activity = (InitialActivity)getActivity();
     }
 
     @Override
