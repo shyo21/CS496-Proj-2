@@ -2,3 +2,4 @@
 /shelf/
 *.iml
 .idea
+local.properties
