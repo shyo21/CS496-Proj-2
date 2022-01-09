@@ -22,7 +22,13 @@ import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.journeyapps.barcodescanner.BarcodeEncoder;
 
+import org.json.JSONObject;
+
+import java.net.URL;
 import java.util.ArrayList;
+
+import io.socket.client.IO;
+import io.socket.emitter.Emitter;
 
 public class Room_screen extends Fragment {
     View myView;
@@ -32,7 +38,7 @@ public class Room_screen extends Fragment {
     String text;
     ArrayList<Integer> displaySize;
     Button startButton;
-
+    private static io.socket.client.Socket mysocket;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,6 +79,43 @@ public class Room_screen extends Fragment {
             startActivity(intent);
         });
 
+
+        System.out.println("gameactivity.java 42");
+        try {
+            System.out.println("소켓 연결 직");
+            URL url = new URL("http://192.249.18.122:443");
+            System.out.println("여기");
+            mysocket = IO.socket(url.toURI());
+            mysocket.connect();
+            mysocket.on("SEND", new Emitter.Listener() {
+                @Override
+                public void call(final Object... args) {
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                JSONObject data = (JSONObject) args[0];
+                                System.out.println(data.getString("message"));
+                                System.out.println("\n");
+                            } catch(Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    });
+                }
+            });
+
+            System.out.println("여기");
+            JSONObject data = new JSONObject();
+            try {
+                data.put("message", "master");
+                mysocket.emit("SEND", data);
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return myView;
     }
 
@@ -84,11 +127,6 @@ public class Room_screen extends Fragment {
             BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
             Bitmap bitmap = barcodeEncoder.createBitmap(bitMatrix);
 
-            /*  Code to change background of QR transparent
-                for(int x = 0; x < 1000; x++) {
-                for (int y = 0; y < 1000; y++) {
-                if (bitmap.getPixel(x,y) == Color.WHITE) { bitmap.setPixel(x,y,Color.TRANSPARENT); }}}
-            */
 
             qrcode = Bitmap.createBitmap(bitmap,120,120,760,760);
         } catch (WriterException e) { e.printStackTrace(); }

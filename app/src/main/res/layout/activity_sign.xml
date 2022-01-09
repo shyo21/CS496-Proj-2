@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SignActivity">
+
+    <TextView
+        android:id="@+id/user_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Name"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/putname"
+        app:layout_constraintBottom_toTopOf="@+id/user_id"
+        app:layout_constraintTop_toTopOf="parent"></TextView>
+
+    <EditText
+        android:id="@+id/putname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="YOUR NAME "
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/user_name"
+        app:layout_constraintBottom_toTopOf="@+id/putid"
+        app:layout_constraintTop_toTopOf="parent"></EditText>
+
+
+    <TextView
+        android:id="@+id/user_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ID"
+        app:layout_constraintBottom_toTopOf="@+id/user_pwd"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/putid"
+        app:layout_constraintTop_toTopOf="parent"></TextView>
+
+    <EditText
+        android:id="@+id/putid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="YOUR ID "
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/user_id"
+        app:layout_constraintBottom_toTopOf="@+id/putpwd"
+        app:layout_constraintTop_toTopOf="parent"></EditText>
+
+    <TextView
+        android:id="@+id/user_pwd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="PWD"
+        app:layout_constraintRight_toLeftOf="@+id/putpwd"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/user_id"></TextView>
+
+    <EditText
+        android:id="@+id/putpwd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="YOUR PASSWORD "
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/user_pwd"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/putid"></EditText>
+
+    <Button
+        android:id="@+id/register"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="가입하기"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="623dp" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
