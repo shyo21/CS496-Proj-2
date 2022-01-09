@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,6 +39,7 @@ public class Game_screen extends Fragment {
     public int scoreValue = 0;
     public boolean timeEnded = false;
     public Handler actionHandler;
+    public Handler tagHandler;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -92,10 +94,7 @@ public class Game_screen extends Fragment {
                     currentButton.setImageResource(R.drawable.mole_punched);
                     currentButton.setTag("pause");
                     scoreValue++;
-                } else if (view.getTag().toString().equals("off")) {
-                    Toast.makeText(getContext(), "nope", Toast.LENGTH_SHORT).show();
-                    if (scoreValue != 0) { scoreValue--; }
-                } else { Toast.makeText(getContext(), "already touched", Toast.LENGTH_SHORT).show(); }
+                }
                 onClickScore clickScore = (onClickScore) getContext();
                 Objects.requireNonNull(clickScore).onClickSetScore(scoreView, scoreValue);
             });
@@ -112,12 +111,19 @@ public class Game_screen extends Fragment {
     }
 
     public void setActionThread() {
-        actionHandler = new Handler(){
+        actionHandler = new Handler() {
             @Override
             public void handleMessage(Message msg) {
                 imageArray[msg.arg1].setTag("on");
                 imageArray[msg.arg1].setImageResource(R.drawable.mole);
                 moleAction(imageArray[msg.arg1], msg.arg2).start();
+            }
+        };
+
+        tagHandler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                imageArray[msg.arg1].setTag("off");
             }
         };
 
@@ -130,6 +136,7 @@ public class Game_screen extends Fragment {
                 while(!timeEnded) {
                     try {
                         Message msg1 = new Message();
+                        Message msg2 = new Message();
                         int randomActionTime = new Random().nextInt(500) + 200;
                         int randomSleepTime = new Random().nextInt(3000) + 1000;
 
@@ -138,7 +145,9 @@ public class Game_screen extends Fragment {
                         msg1.arg2 = randomActionTime;
                         actionHandler.sendMessage(msg1);
 
-                        Thread.sleep(randomActionTime);
+                        Thread.sleep(2L * randomActionTime);
+                        msg2.arg1 = i;
+                        tagHandler.sendMessage(msg2);
                     } catch (Exception e){ e.printStackTrace(); }
                 }
             }
