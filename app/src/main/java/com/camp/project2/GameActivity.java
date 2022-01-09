@@ -6,9 +6,21 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.view.WindowManager;
+import android.util.Log;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.URL;
+
+import io.socket.client.IO;
+import io.socket.emitter.Emitter;
 
 public class GameActivity extends AppCompatActivity implements Game_screen.onClickScore {
 
@@ -72,4 +84,41 @@ public class GameActivity extends AppCompatActivity implements Game_screen.onCli
         scoreView.setText(String.valueOf(scoreValue));
     }
 
+/*
+    public void socketcommunication(){
+        socket = new Socket();
+        try{
+            socket.connect(new InetSocketAddress("http://192.249.18.122:443/", 433));
+            is = socket.getInputStream();
+            os = socket.getOutputStream();
+
+            byte[] byteArr = null;
+            String msg = "Hello server";
+
+            byteArr = msg.getBytes("UTF-8");
+            os.write(byteArr);
+            os.flush();
+            System.out.println("Data transmitted Ok!");
+
+            byteArr = new byte[512];
+            int readBytecount = is.read();
+            if(readBytecount == -1){
+                throw new IOException();
+            }
+
+            msg = new String(byteArr, 0, readBytecount, "UTF-8");
+            System.out.println("Data received OK!");
+            System.out.println("Message : " + msg);
+
+            is.close();
+            os.close();
+
+            socket.close();
+        }catch (Exception e){
+            e.printStackTrace();
+
+        }
+    }
+
+ */
 }

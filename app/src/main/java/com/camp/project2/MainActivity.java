@@ -12,9 +12,14 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
 
+import okhttp3.OkHttpClient;
 import okhttp3.ResponseBody;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -31,6 +36,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public String s_pwd;
     public RetrofitService myInterface;
     public Retrofit retrofit;
+    //public Login_info login_info;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,12 +53,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         reg = findViewById(R.id.reg);
         reg.setOnClickListener(this);
 
-        s_id = id.getText().toString();
-        s_pwd = pwd.getText().toString();
+
+
+        //login_info = new Login_info(s_id, s_pwd);
+
+        OkHttpClient.Builder clientBuilder = new OkHttpClient.Builder();
+        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
+        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        clientBuilder.addInterceptor(loggingInterceptor);
 
         retrofit = new Retrofit.Builder()
                 .baseUrl("http://192.249.18.122:443/")
                 .addConverterFactory(GsonConverterFactory.create())
+                .client(clientBuilder.build())
                 .build();
         myInterface = retrofit.create(RetrofitService.class);
 
@@ -65,7 +78,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (view.getId()){
             case R.id.login:
                 System.out.println("we are here");
-                Call<ResponseBody> call_post = myInterface.postFunc("post data");
+                s_id = id.getText().toString();
+                s_pwd = pwd.getText().toString();
+                Login_info login_info = new Login_info(s_id, s_pwd);
+                JSONObject jsonObject = new JSONObject();
+                try {
+                    jsonObject.put("id", "chackhangun");
+                    jsonObject.put("pwd", "asdf6743");
+                }catch (JSONException e){
+                    e.printStackTrace();
+                }
+                Call<ResponseBody> call_post = myInterface.logIn(s_id, s_pwd);
+                //Call<ResponseBody> call_post = myInterface.postFunc(jsonObject);
+                //Call<ResponseBody> call_post = myInterface.logIn(login_info);
+
                 call_post.enqueue(new Callback<ResponseBody>() {
                     @Override
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -92,6 +118,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 });
                 break;
             case R.id.reg:
+                Intent intent2 = new Intent(this, SignActivity.class);
+                startActivity(intent2);
                 break;
         }
 
