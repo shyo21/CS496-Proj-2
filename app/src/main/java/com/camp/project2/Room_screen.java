@@ -2,12 +2,14 @@ package com.camp.project2;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
@@ -31,7 +33,7 @@ public class Room_screen extends Fragment {
     recyclerAdapter adapter;
     String text;
     ArrayList<Integer> displaySize;
-    Button startButton;
+    ImageButton startButton;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -57,7 +59,7 @@ public class Room_screen extends Fragment {
 
         text = "https://google.com";
 
-        playerList.getLayoutParams().width = (int) (0.9 * displayWidth);
+        playerList.getLayoutParams().width = (int) (0.85 * displayWidth);
         playerList.getLayoutParams().height = (int) (0.35 * displayHeight);
         playerList.setHasFixedSize(true);
         playerList.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -67,6 +69,9 @@ public class Room_screen extends Fragment {
         qrCode.getLayoutParams().width = (int) (0.3 * displayWidth);
         qrCode.getLayoutParams().height = (int) (0.3 * displayWidth);
         qrCode.setImageBitmap(qrCodeMaker(text));
+
+        startButton.getLayoutParams().width = (int) (0.13 * displayWidth);
+        startButton.getLayoutParams().height = (int) (0.3 * displayWidth);
 
         startButton.setOnClickListener(view -> {
             Intent intent = new Intent(getActivity(), GameActivity.class);
@@ -84,11 +89,9 @@ public class Room_screen extends Fragment {
             BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
             Bitmap bitmap = barcodeEncoder.createBitmap(bitMatrix);
 
-            /*  Code to change background of QR transparent
-                for(int x = 0; x < 1000; x++) {
+            for(int x = 0; x < 1000; x++) {
                 for (int y = 0; y < 1000; y++) {
                 if (bitmap.getPixel(x,y) == Color.WHITE) { bitmap.setPixel(x,y,Color.TRANSPARENT); }}}
-            */
 
             qrcode = Bitmap.createBitmap(bitmap,120,120,760,760);
         } catch (WriterException e) { e.printStackTrace(); }

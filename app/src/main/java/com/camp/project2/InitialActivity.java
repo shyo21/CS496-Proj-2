@@ -2,7 +2,10 @@ package com.camp.project2;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.Color;
 import android.os.Bundle;
+import android.view.View;
+import android.view.WindowManager;
 
 public class InitialActivity extends AppCompatActivity{
     //onAttach() -> fragment를 activtiy에 attach
@@ -30,6 +33,10 @@ public class InitialActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState)  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
+
+        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+        getWindow().setStatusBarColor(Color.TRANSPARENT);
 
         viewPager = findViewById(R.id.viewpager);
         viewPager.setPagingEnabled(false);

@@ -9,25 +9,23 @@ import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
 import java.util.Objects;
 import java.util.Random;
-import java.util.concurrent.TimeUnit;
 
 public class Game_screen extends Fragment {
     public TextView stopwatch;
     public TextView scoreView;
-    public Button gameStart;
-    public ImageButton[] imageArray = new ImageButton[9];
-    public Integer[] imageId = new Integer[9];
+    public ImageButton[] moleArray = new ImageButton[9];
+    public Integer[] moleId = new Integer[9];
+    public ImageView[] pipeArray = new ImageView[9];
+    public Integer[] pipeId = new Integer[9];
     public Thread[] actionThread = new Thread[9];
     public int scoreValue = 0;
     public boolean timeEnded = false;
@@ -45,29 +43,23 @@ public class Game_screen extends Fragment {
                              Bundle savedInstanceState) {
         ViewGroup myView = (ViewGroup)inflater.inflate(R.layout.fragment_game_screen, container, false);
         stopwatch = myView.findViewById(R.id.stopWatch);
-        gameStart = myView.findViewById(R.id.gameStart);
         scoreView = myView.findViewById(R.id.score);
-        imageId = new Integer[]{ R.id.mole1, R.id.mole2, R.id.mole3, R.id.mole4, R.id.mole5, R.id.mole6, R.id.mole7, R.id.mole8, R.id.mole9 };
+        moleId = new Integer[]{ R.id.mole1, R.id.mole2, R.id.mole3, R.id.mole4, R.id.mole5, R.id.mole6, R.id.mole7, R.id.mole8, R.id.mole9 };
+        pipeId = new Integer[]{ R.id.pipe1, R.id.pipe2, R.id.pipe3, R.id.pipe4, R.id.pipe5, R.id.pipe6, R.id.pipe7, R.id.pipe8, R.id.pipe9 };
 
-        for (int i = 0; i < imageArray.length; i++) {
-            imageArray[i] = myView.findViewById(imageId[i]);
-            imageArray[i].setTag("off");
+        for (int i = 0; i < moleArray.length; i++) {
+            moleArray[i] = myView.findViewById(moleId[i]);
+            moleArray[i].setTag("off");
+            //moleArray[i].setVisibility(View.INVISIBLE);
+            pipeArray[i] = myView.findViewById(pipeId[i]);
+            //pipeArray[i].setVisibility(View.INVISIBLE);
         }
 
-        scoreView.setVisibility(View.GONE);
-        setOnClickListeners(imageArray);
+        setOnClickListeners(moleArray);
+        setActionThread();
 
-        gameStart.setOnClickListener(view -> {
-            gameStart.setVisibility(View.GONE);
-            scoreView.setVisibility(View.VISIBLE);
-            try { TimeUnit.SECONDS.sleep(3);
-            } catch (InterruptedException e) { e.printStackTrace(); }
-
-            ((GameActivity) requireActivity()).timerThread.start();
-
-            setActionThread();
-            for (Thread thread : actionThread) { thread.start(); }
-        });
+        for (Thread thread : actionThread) { thread.start(); }
+        ((GameActivity) requireActivity()).timerThread.start();
 
         return myView;
     }
@@ -80,7 +72,6 @@ public class Game_screen extends Fragment {
         for (ImageButton currentButton : imageArray) {
             currentButton.setOnClickListener(view -> {
                 if (view.getTag().toString().equals("on")) {
-                    Toast.makeText(getContext(), "good", Toast.LENGTH_SHORT).show();
                     currentButton.setImageResource(R.drawable.mole_punched);
                     currentButton.setTag("pause");
                     scoreValue++;
@@ -93,7 +84,7 @@ public class Game_screen extends Fragment {
 
     public AnimatorSet moleAction(ImageButton mole, Integer speed) {
         AnimatorSet animatorSet = new AnimatorSet();
-        ObjectAnimator up = ObjectAnimator.ofFloat(mole, "translationY", -150);
+        ObjectAnimator up = ObjectAnimator.ofFloat(mole, "translationY", -140);
         ObjectAnimator down = ObjectAnimator.ofFloat(mole, "translationY", 0);
         animatorSet.play(up).before(down);
         animatorSet.setDuration(speed);
@@ -104,16 +95,16 @@ public class Game_screen extends Fragment {
         actionHandler = new Handler() {
             @Override
             public void handleMessage(Message msg) {
-                imageArray[msg.arg1].setTag("on");
-                imageArray[msg.arg1].setImageResource(R.drawable.mole);
-                moleAction(imageArray[msg.arg1], msg.arg2).start();
+                moleArray[msg.arg1].setTag("on");
+                moleArray[msg.arg1].setImageResource(R.drawable.mole);
+                moleAction(moleArray[msg.arg1], msg.arg2).start();
             }
         };
 
         tagHandler = new Handler() {
             @Override
             public void handleMessage(Message msg) {
-                imageArray[msg.arg1].setTag("off");
+                moleArray[msg.arg1].setTag("off");
             }
         };
 
@@ -142,7 +133,7 @@ public class Game_screen extends Fragment {
                 }
             }
         }
-        for (int i = 0; i < imageArray.length; i++) {
+        for (int i = 0; i < moleArray.length; i++) {
             setAction action = new setAction(i);
             actionThread[i] = new Thread(action);
         }
