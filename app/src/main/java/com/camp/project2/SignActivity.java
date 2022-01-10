@@ -6,8 +6,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -26,7 +26,7 @@ public class SignActivity extends AppCompatActivity implements View.OnClickListe
     public EditText putId;
     public EditText putPwd;
     public EditText putName;
-    public Button register;
+    public ImageButton register;
     public RetrofitClient retrofitClient;
     public Retrofit retrofit;
     public RetrofitService myInterface;
