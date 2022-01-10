@@ -105,8 +105,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 e.printStackTrace();
                             }
                             Userinfo userinfo = new Userinfo();
-                            userinfo.setlogin_check(true);
-                            userinfo.setuserid(s_id);
+                            userinfo.set_login_check(true);
+                            userinfo.setUserId(s_id);
 
                             System.out.println("login id = " + s_id);
                             changeScreen();

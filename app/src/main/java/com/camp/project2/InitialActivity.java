@@ -1,16 +1,11 @@
 package com.camp.project2;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
 
-import org.json.JSONObject;
-
-import io.socket.client.Socket;
-import io.socket.emitter.Emitter;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class InitialActivity extends AppCompatActivity{
     public Character_screen c_screen;

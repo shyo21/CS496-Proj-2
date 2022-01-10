@@ -16,7 +16,8 @@
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/playerColor"
         app:layout_constraintStart_toEndOf="@+id/playerColor"
-        app:layout_constraintTop_toTopOf="@+id/playerColor" />
+        app:layout_constraintTop_toTopOf="@+id/playerColor"
+        tools:ignore="HardcodedText" />
 
     <ImageView
         android:id="@+id/playerColor"
@@ -29,6 +30,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/among_us" />
+        app:srcCompat="@drawable/among_us"
+        tools:ignore="ContentDescription" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

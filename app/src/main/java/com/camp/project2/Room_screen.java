@@ -23,12 +23,7 @@ import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.journeyapps.barcodescanner.BarcodeEncoder;
 
-import org.json.JSONObject;
-
 import java.util.ArrayList;
-
-import io.socket.client.Socket;
-import io.socket.emitter.Emitter;
 
 
 public class Room_screen extends Fragment {
@@ -39,7 +34,7 @@ public class Room_screen extends Fragment {
     public String text;
     public ImageButton startButton;
     public Userinfo userinfo;
-    public ArrayList<playerListItem> mList = new ArrayList<playerListItem>();
+    public ArrayList<playerListItem> mList = new ArrayList<>();
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {

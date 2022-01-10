@@ -1,39 +1,39 @@
 package com.camp.project2;
 
 public class Userinfo {
-    private static String userid = null;
+    private static String userId = null;
     private static boolean login_check = false;
-    private static String roomurl = null;
-    private static String usercolor = "white";
+    private static String roomUrl = null;
+    private static String userColor = "white";
 
-    public Userinfo(){
+    public Userinfo(){ }
 
-    }
-
-    public void setroomurl(String url){
-        if(roomurl == null){
-            roomurl = url;
+    public void setRoomUrl(String url){
+        if(roomUrl == null){
+            roomUrl = url;
         }
     }
 
-    public void setuserid(String id){
-        if(userid == null){
-            userid = id;
+    public void setUserId(String id){
+        if(userId == null){
+            userId = id;
         }
     }
 
-    public void setusercolor(String col){
-        usercolor = col;
+    public void setUserColor(String col){
+        userColor = col;
     }
-    public String getuserid(){
-        return userid;
+
+    public String getUserId(){
+        return userId;
     }
-    public String getroomurl(){
-        return roomurl;
+    public String getRoomUrl(){
+        return roomUrl;
     }
-    public String getusercolor() {return usercolor;}
-    public void setlogin_check(boolean check){
-        if(login_check == false){
+    public String getUserColor() {return userColor;}
+
+    public void set_login_check(boolean check) {
+        if(!login_check){
             login_check = check;
         }
     }

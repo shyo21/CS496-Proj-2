@@ -23,8 +23,6 @@ import com.journeyapps.barcodescanner.BarcodeEncoder;
 import org.json.JSONObject;
 
 import io.socket.client.Socket;
-import io.socket.emitter.Emitter;
-
 
 public class Character_screen extends Fragment implements View.OnClickListener {
     private final String TAG = "CharacterScreenLog";
@@ -75,7 +73,7 @@ public class Character_screen extends Fragment implements View.OnClickListener {
             int position = activity.viewPager.getCurrentItem();
             if(position == 0){
                 socketInterface = new SocketInterface(getActivity());
-                Socket mysocket = socketInterface.getinstance();
+                Socket mysocket = socketInterface.getInstance();
                 socketInterface.createroom();
                 mysocket.on("CREATEROOM", args -> requireActivity().runOnUiThread(() -> {
                     try {
@@ -127,33 +125,22 @@ public class Character_screen extends Fragment implements View.OnClickListener {
             }
         });
 
-        find_room.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                socketInterface = new SocketInterface(getActivity());
-                Socket mysocket =socketInterface.getinstance();
-                socketInterface.joinroom();
-                int position2 = activity.viewPager.getCurrentItem();
-                mysocket.on("JOINROOM", new Emitter.Listener() {
-                    @Override
-                    public void call(final Object... args) {
-                        getActivity().runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                try {
-                                    JSONObject data = (JSONObject) args[0];
-                                    System.out.println(data.getString("userid"));
-                                    room_number = data.getString("color");
-                                } catch (Exception e) {
-                                    e.printStackTrace();
-                                }
-                            }
-                        });
-                    }
-                });
-                if(position2 == 0){
-                    activity.viewPager.setCurrentItem(1, true);
+        find_room.setOnClickListener(view -> {
+            socketInterface = new SocketInterface(getActivity());
+            Socket mysocket =socketInterface.getInstance();
+            socketInterface.joinroom();
+            int position2 = activity.viewPager.getCurrentItem();
+            mysocket.on("JOINROOM", args -> requireActivity().runOnUiThread(() -> {
+                try {
+                    JSONObject data = (JSONObject) args[0];
+                    System.out.println(data.getString("userid"));
+                    room_number = data.getString("color");
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
+            }));
+            if(position2 == 0){
+                activity.viewPager.setCurrentItem(1, true);
             }
         });
 
@@ -166,29 +153,29 @@ public class Character_screen extends Fragment implements View.OnClickListener {
         Userinfo userinfo = new Userinfo();
         switch (view.getId()){
             case R.id.red_button:
-                userinfo.setusercolor("red");
+                userinfo.setUserColor("red");
                 System.out.println("red");
                 characterview.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.red));
                 break;
             case R.id.yellow_button:
-                userinfo.setusercolor("yellow");
+                userinfo.setUserColor("yellow");
                 System.out.println("yellow");
                 characterview.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.yellow));
                 break;
             case R.id.green_button:
-                userinfo.setusercolor("green");
+                userinfo.setUserColor("green");
                 characterview.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.green));
                 break;
             case R.id.blue_button:
-                userinfo.setusercolor("blue");
+                userinfo.setUserColor("blue");
                 characterview.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.blue));
                 break;
             case R.id.purple_button:
-                userinfo.setusercolor("purple");
+                userinfo.setUserColor("purple");
                 characterview.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.sky_blue));
                 break;
             case R.id.black_button:
-                userinfo.setusercolor("black");
+                userinfo.setUserColor("black");
                 characterview.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.purple));
                 break;
         }
