@@ -49,7 +49,6 @@ public class Character_screen extends Fragment implements View.OnClickListener {
     private Button blue_button;
     private Button purple_button;
     private Button black_button;
-    private TextView testview;
     private ImageView characterview;
     public SocketInterface socketInterface;
     public String room_number = null;
@@ -71,6 +70,7 @@ public class Character_screen extends Fragment implements View.OnClickListener {
 
         make_room = rootView.findViewById(R.id.room_create_button);
         find_room = rootView.findViewById(R.id.find_room);
+        find_room.setOnClickListener(this);
         characterview = rootView.findViewById(R.id.character_img);
         red_button = rootView.findViewById(R.id.red_button);
         red_button.setOnClickListener(this);
@@ -155,7 +155,30 @@ public class Character_screen extends Fragment implements View.OnClickListener {
         find_room.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                socketInterface = new SocketInterface(getActivity());
+                Socket mysocket =socketInterface.getinstance();
+                socketInterface.joinroom();
+                int position2 = activity.viewPager.getCurrentItem();
+                mysocket.on("JOINROOM", new Emitter.Listener() {
+                    @Override
+                    public void call(final Object... args) {
+                        getActivity().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                try {
+                                    JSONObject data = (JSONObject) args[0];
+                                    System.out.println(data.getString("userid"));
+                                    room_number = data.getString("color");
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        });
+                    }
+                });
+                if(position2 == 0){
+                    activity.viewPager.setCurrentItem(1, true);
+                }
             }
         });
 

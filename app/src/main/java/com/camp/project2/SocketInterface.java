@@ -48,26 +48,19 @@ public class SocketInterface extends AsyncTask {
         return mysocket;
     }
 
-    public void send(){
+    public void joinroom() {
         JSONObject data = new JSONObject();
         try {
-            data.put("message", "master");
-            mysocket.emit("SEND", data);
+            Userinfo userinfo = new Userinfo();
+            String userid = userinfo.getuserid();
+            String usercolor = userinfo.getusercolor();
+            data.put("userid", userid);
+            data.put("usercolor", usercolor);
+            mysocket.emit("JOINROOM", data);
         }catch (Exception e){
             e.printStackTrace();
         }
     }
-    /*
-
-    public void sendtest(){
-        JSONObject data = new JSONObject();
-        try {
-            data.put("test", "test complete");
-            mysocket.emit("TESTSEND", data);
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-    }*/
 
     public void createroom(){
         JSONObject data = new JSONObject();
