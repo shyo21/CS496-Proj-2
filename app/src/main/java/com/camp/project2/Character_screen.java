@@ -164,23 +164,32 @@ public class Character_screen extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View view){
+        Userinfo userinfo = new Userinfo();
         switch (view.getId()){
             case R.id.red_button:
+                userinfo.setusercolor("red");
+                System.out.println("red");
                 characterview.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.red));
                 break;
             case R.id.yellow_button:
+                userinfo.setusercolor("yellow");
+                System.out.println("yellow");
                 characterview.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.yellow));
                 break;
             case R.id.green_button:
+                userinfo.setusercolor("green");
                 characterview.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.green));
                 break;
             case R.id.blue_button:
+                userinfo.setusercolor("blue");
                 characterview.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.blue));
                 break;
             case R.id.purple_button:
+                userinfo.setusercolor("purple");
                 characterview.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.sky_blue));
                 break;
             case R.id.black_button:
+                userinfo.setusercolor("black");
                 characterview.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.purple));
                 break;
         }
