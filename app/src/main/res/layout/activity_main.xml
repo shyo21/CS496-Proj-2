@@ -18,7 +18,7 @@
         android:scaleType="centerInside"
         android:src="@drawable/login"
         app:layout_constraintStart_toEndOf="@+id/main_signUpButton"
-        app:layout_constraintTop_toBottomOf="@+id/pwd"
+        app:layout_constraintTop_toBottomOf="@+id/main_pwd"
         tools:ignore="ContentDescription,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
     <ImageButton
@@ -31,11 +31,11 @@
         android:scaleType="centerInside"
         android:src="@drawable/signup"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pwd"
+        app:layout_constraintTop_toBottomOf="@+id/main_pwd"
         tools:ignore="ContentDescription,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
     <EditText
-        android:id="@+id/id"
+        android:id="@+id/main_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="220dp"
@@ -46,14 +46,14 @@
         tools:ignore="Autofill,HardcodedText,TextContrastCheck,TextFields,TouchTargetSizeCheck" />
 
     <EditText
-        android:id="@+id/pwd"
+        android:id="@+id/main_pwd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="80dp"
         android:layout_marginTop="30dp"
         android:hint="Enter Password"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/id"
+        app:layout_constraintTop_toBottomOf="@+id/main_id"
         tools:ignore="Autofill,HardcodedText,TextContrastCheck,TextFields,TouchTargetSizeCheck" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

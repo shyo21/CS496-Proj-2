@@ -26,35 +26,35 @@ import com.journeyapps.barcodescanner.BarcodeEncoder;
 import java.util.ArrayList;
 
 
-public class Room_screen extends Fragment {
+public class Room_Fragment extends Fragment {
     public View myView;
     public ImageView qrCode;
     public RecyclerView playerList;
-    public recyclerAdapter adapter;
+    public Room_RecyclerAdapter adapter;
     public String text;
     public ImageButton startButton;
-    public Userinfo userinfo;
-    public ArrayList<playerListItem> mList = new ArrayList<>();
+    public User_Info userinfo;
+    public ArrayList<Room_PlayerInfo> mList = new ArrayList<>();
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        userinfo = new Userinfo();
+        userinfo = new User_Info();
 
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        myView = inflater.inflate(R.layout.fragment_room_screen, container, false);
-        qrCode = myView.findViewById(R.id.qrCode);
-        playerList = myView.findViewById(R.id.playerList);
-        startButton = myView.findViewById(R.id.startButton);
+        myView = inflater.inflate(R.layout.fragment_room, container, false);
+        qrCode = myView.findViewById(R.id.room_qrCode);
+        playerList = myView.findViewById(R.id.room_playerList);
+        startButton = myView.findViewById(R.id.room_startButton);
 
         text = "http://google.com";
 
         playerList.setLayoutManager(new LinearLayoutManager(getActivity()));
-        adapter = new recyclerAdapter(mList);
+        adapter = new Room_RecyclerAdapter(mList);
         playerList.setAdapter(adapter);
 
         addItem("red", "player1");
@@ -105,7 +105,7 @@ public class Room_screen extends Fragment {
     }
 
     public void addItem(String color, String name) {
-        playerListItem item = new playerListItem();
+        Room_PlayerInfo item = new Room_PlayerInfo();
         item.setIconColor(color);
         item.setUserName(name);
 

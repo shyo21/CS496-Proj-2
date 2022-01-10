@@ -20,7 +20,7 @@ import androidx.fragment.app.Fragment;
 import java.util.Objects;
 import java.util.Random;
 
-public class Game_screen extends Fragment {
+public class Game_Fragment extends Fragment {
 
     public TextView stopwatch;
     public TextView scoreView;
@@ -45,7 +45,7 @@ public class Game_screen extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        ViewGroup myView = (ViewGroup)inflater.inflate(R.layout.fragment_game_screen, container, false);
+        ViewGroup myView = (ViewGroup)inflater.inflate(R.layout.fragment_game, container, false);
         stopwatch = myView.findViewById(R.id.game_stopWatch);
         scoreView = myView.findViewById(R.id.game_score);
         moleId = new Integer[]{ R.id.mole1, R.id.mole2, R.id.mole3, R.id.mole4, R.id.mole5, R.id.mole6, R.id.mole7, R.id.mole8, R.id.mole9 };

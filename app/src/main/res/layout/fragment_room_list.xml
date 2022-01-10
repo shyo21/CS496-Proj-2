@@ -6,7 +6,7 @@
     android:layout_height="wrap_content">
 
     <TextView
-        android:id="@+id/playerName"
+        android:id="@+id/room_playerName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
@@ -14,13 +14,13 @@
         android:text="TextView"
         android:textColor="@color/text"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/playerColor"
-        app:layout_constraintStart_toEndOf="@+id/playerColor"
-        app:layout_constraintTop_toTopOf="@+id/playerColor"
+        app:layout_constraintBottom_toBottomOf="@+id/room_playerColor"
+        app:layout_constraintStart_toEndOf="@+id/room_playerColor"
+        app:layout_constraintTop_toTopOf="@+id/room_playerColor"
         tools:ignore="HardcodedText" />
 
     <ImageView
-        android:id="@+id/playerColor"
+        android:id="@+id/room_playerColor"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginStart="2dp"

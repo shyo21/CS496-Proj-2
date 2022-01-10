@@ -24,7 +24,7 @@ import org.json.JSONObject;
 
 import io.socket.client.Socket;
 
-public class Character_screen extends Fragment implements View.OnClickListener {
+public class Character_Fragment extends Fragment implements View.OnClickListener {
     private final String TAG = "CharacterScreenLog";
     private ImageButton make_room;
     private ImageButton find_room;
@@ -39,18 +39,18 @@ public class Character_screen extends Fragment implements View.OnClickListener {
     public String room_number = null;
     public String address = null;
 
-    InitialActivity activity;
+    RoomActivity activity;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        activity = (InitialActivity)getActivity();
+        activity = (RoomActivity)getActivity();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         System.out.println("here");
-        ViewGroup rootView = (ViewGroup)inflater.inflate(R.layout.fragment_character_screen, container, false);
+        ViewGroup rootView = (ViewGroup)inflater.inflate(R.layout.fragment_character, container, false);
 
         make_room = rootView.findViewById(R.id.character_makeRoom);
         find_room = rootView.findViewById(R.id.character_findRoom);
@@ -150,7 +150,7 @@ public class Character_screen extends Fragment implements View.OnClickListener {
     @SuppressLint("NonConstantResourceId")
     @Override
     public void onClick(View view){
-        Userinfo userinfo = new Userinfo();
+        User_Info userinfo = new User_Info();
         switch (view.getId()){
             case R.id.red_button:
                 userinfo.setUserColor("red");

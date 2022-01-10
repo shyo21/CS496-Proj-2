@@ -4,77 +4,50 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
+    android:fitsSystemWindows="true"
     tools:context=".SignActivity">
 
-    <TextView
-        android:id="@+id/user_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Name"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@+id/putname"
-        app:layout_constraintBottom_toTopOf="@+id/user_id"
-        app:layout_constraintTop_toTopOf="parent"></TextView>
 
     <EditText
-        android:id="@+id/putname"
+        android:id="@+id/sign_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="YOUR NAME "
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toRightOf="@+id/user_name"
-        app:layout_constraintBottom_toTopOf="@+id/putid"
-        app:layout_constraintTop_toTopOf="parent"></EditText>
-
-
-    <TextView
-        android:id="@+id/user_id"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="ID"
-        app:layout_constraintBottom_toTopOf="@+id/user_pwd"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@+id/putid"
-        app:layout_constraintTop_toTopOf="parent"></TextView>
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="180dp"
+        android:hint="Enter Name"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="Autofill,HardcodedText,TextContrastCheck,TextFields,TouchTargetSizeCheck" />
 
     <EditText
-        android:id="@+id/putid"
+        android:id="@+id/sign_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="YOUR ID "
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toRightOf="@+id/user_id"
-        app:layout_constraintBottom_toTopOf="@+id/putpwd"
-        app:layout_constraintTop_toTopOf="parent"></EditText>
-
-    <TextView
-        android:id="@+id/user_pwd"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="PWD"
-        app:layout_constraintRight_toLeftOf="@+id/putpwd"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/user_id"></TextView>
+        android:layout_marginTop="50dp"
+        android:hint="Enter ID"
+        app:layout_constraintStart_toStartOf="@+id/sign_name"
+        app:layout_constraintTop_toBottomOf="@+id/sign_name"
+        tools:ignore="Autofill,HardcodedText,TextContrastCheck,TextFields,TouchTargetSizeCheck" />
 
     <EditText
-        android:id="@+id/putpwd"
+        android:id="@+id/sign_password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="YOUR PASSWORD "
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toRightOf="@+id/user_pwd"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/putid"></EditText>
+        android:layout_marginTop="50dp"
+        android:hint="Enter Password"
+        app:layout_constraintStart_toStartOf="@+id/sign_id"
+        app:layout_constraintTop_toBottomOf="@+id/sign_id"
+        tools:ignore="Autofill,HardcodedText,TextContrastCheck,TextFields,TouchTargetSizeCheck" />
 
     <Button
-        android:id="@+id/register"
+        android:id="@+id/sign_signUpButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="132dp"
         android:text="가입하기"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="623dp" />
+        app:layout_constraintStart_toStartOf="@+id/sign_password"
+        app:layout_constraintTop_toBottomOf="@+id/sign_password" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -52,7 +52,7 @@ public class SocketInterface extends AsyncTask {
     public void joinroom() {
         JSONObject data = new JSONObject();
         try {
-            Userinfo userinfo = new Userinfo();
+            User_Info userinfo = new User_Info();
             String userid = userinfo.getUserId();
             String usercolor = userinfo.getUserColor();
             data.put("userid", userid);
@@ -66,7 +66,7 @@ public class SocketInterface extends AsyncTask {
     public void createroom(){
         JSONObject data = new JSONObject();
         try{
-            Userinfo userinfo = new Userinfo();
+            User_Info userinfo = new User_Info();
             String userid = userinfo.getUserId();
             String usercolor = userinfo.getUserColor();
             System.out.println(userid);

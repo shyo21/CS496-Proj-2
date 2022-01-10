@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Objects;
 
-public class Result_screen extends Fragment {
+public class Result_Fragment extends Fragment {
 
     View myView;
     RecyclerView roulette;
@@ -34,7 +34,7 @@ public class Result_screen extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        myView = inflater.inflate(R.layout.fragment_result_screen, container, false);
+        myView = inflater.inflate(R.layout.fragment_result, container, false);
         roulette = myView.findViewById(R.id.roulette);
         button = myView.findViewById(R.id.button);
 
@@ -71,7 +71,7 @@ public class Result_screen extends Fragment {
 
     private CountDownTimer recursiveTimer(RecyclerView roulette, Integer duration, Integer interval) {
         LinearLayoutManager linearLayoutManager = (LinearLayoutManager) roulette.getLayoutManager();
-        recyclerAdapter adapter = (recyclerAdapter) roulette.getAdapter();
+        Room_RecyclerAdapter adapter = (Room_RecyclerAdapter) roulette.getAdapter();
         if(duration == 2000) { duration -= 1000; }
 
         if (interval <= 400) {

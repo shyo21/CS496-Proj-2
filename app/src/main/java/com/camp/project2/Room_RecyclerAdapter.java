@@ -12,9 +12,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class recyclerAdapter extends RecyclerView.Adapter<recyclerAdapter.ViewHolder> {
+public class Room_RecyclerAdapter extends RecyclerView.Adapter<Room_RecyclerAdapter.ViewHolder> {
 
-    private final ArrayList<playerListItem> mData;
+    private final ArrayList<Room_PlayerInfo> mData;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         ImageView color;
@@ -22,12 +22,12 @@ public class recyclerAdapter extends RecyclerView.Adapter<recyclerAdapter.ViewHo
 
         ViewHolder(View view) {
             super(view);
-            color = view.findViewById(R.id.playerColor);
-            name = view.findViewById(R.id.playerName);
+            color = view.findViewById(R.id.room_playerColor);
+            name = view.findViewById(R.id.room_playerName);
         }
     }
 
-    public recyclerAdapter(ArrayList<playerListItem> list) {
+    public Room_RecyclerAdapter(ArrayList<Room_PlayerInfo> list) {
         mData = list;
     }
 
@@ -37,13 +37,13 @@ public class recyclerAdapter extends RecyclerView.Adapter<recyclerAdapter.ViewHo
         Context context = parent.getContext();
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        View view = inflater.inflate(R.layout.playerlist,parent,false);
+        View view = inflater.inflate(R.layout.fragment_room_list,parent,false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        playerListItem item = mData.get(position);
+        Room_PlayerInfo item = mData.get(position);
         holder.name.setText(item.getUserName());
     }
 

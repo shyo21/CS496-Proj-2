@@ -9,7 +9,7 @@
     android:fitsSystemWindows="true">
 
     <ImageView
-        android:id="@+id/qrCode"
+        android:id="@+id/room_qrCode"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginStart="20dp"
@@ -20,7 +20,7 @@
         tools:ignore="ContentDescription" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/playerList"
+        android:id="@+id/room_playerList"
         android:layout_width="match_parent"
         android:layout_height="250dp"
         android:layout_marginTop="15dp"
@@ -29,18 +29,18 @@
         android:nestedScrollingEnabled="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/qrCode"
+        app:layout_constraintTop_toBottomOf="@+id/room_qrCode"
         tools:ignore="UnusedAttribute" />
 
     <ImageButton
-        android:id="@+id/startButton"
+        android:id="@+id/room_startButton"
         android:layout_width="50dp"
         android:layout_height="278dp"
         android:layout_marginStart="10dp"
         android:background="@color/transparent"
         android:scaleType="centerInside"
-        app:layout_constraintStart_toEndOf="@+id/qrCode"
-        app:layout_constraintTop_toTopOf="@+id/qrCode"
+        app:layout_constraintStart_toEndOf="@+id/room_qrCode"
+        app:layout_constraintTop_toTopOf="@+id/room_qrCode"
         app:srcCompat="@drawable/play_button_vertical"
         tools:ignore="ContentDescription,HardcodedText,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 

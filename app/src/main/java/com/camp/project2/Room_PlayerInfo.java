@@ -1,6 +1,6 @@
 package com.camp.project2;
 
-public class playerListItem {
+public class Room_PlayerInfo {
     private String iconColor;
     private String userName;
 
