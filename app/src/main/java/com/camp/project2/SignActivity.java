@@ -11,7 +11,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
@@ -57,8 +56,6 @@ public class SignActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View view){
         switch (view.getId()){
             case R.id.register:
-                System.out.println("we are here");
-                JSONObject jsonObject = new JSONObject();
                 String reqid = putid.getText().toString();
                 String reqpwd = putpwd.getText().toString();
                 String reqname = putname.getText().toString();
