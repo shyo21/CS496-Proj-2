@@ -12,9 +12,11 @@
         android:id="@+id/qrCode"
         android:layout_width="100dp"
         android:layout_height="100dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
         android:scaleType="centerCrop"
-        app:layout_constraintStart_toStartOf="@+id/guideline4"
-        app:layout_constraintTop_toTopOf="@+id/guideline6"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:ignore="ContentDescription" />
 
     <androidx.recyclerview.widget.RecyclerView
@@ -32,27 +34,14 @@
 
     <ImageButton
         android:id="@+id/startButton"
-        android:layout_width="35dp"
-        android:layout_height="200dp"
+        android:layout_width="50dp"
+        android:layout_height="278dp"
         android:layout_marginStart="10dp"
         android:background="@color/transparent"
         android:scaleType="centerInside"
         app:layout_constraintStart_toEndOf="@+id/qrCode"
-        app:layout_constraintTop_toTopOf="@+id/guideline6"
+        app:layout_constraintTop_toTopOf="@+id/qrCode"
         app:srcCompat="@drawable/play_button_vertical"
         tools:ignore="ContentDescription,HardcodedText,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.05" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.03" />
 </androidx.constraintlayout.widget.ConstraintLayout>

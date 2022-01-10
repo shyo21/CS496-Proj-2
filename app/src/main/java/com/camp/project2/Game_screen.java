@@ -2,6 +2,7 @@ package com.camp.project2;
 
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.annotation.SuppressLint;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -16,14 +17,8 @@ import android.widget.TextView;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
-import org.json.JSONObject;
-
-import java.net.URL;
 import java.util.Objects;
 import java.util.Random;
-
-import io.socket.client.IO;
-import io.socket.emitter.Emitter;
 
 public class Game_screen extends Fragment {
 
@@ -51,8 +46,8 @@ public class Game_screen extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         ViewGroup myView = (ViewGroup)inflater.inflate(R.layout.fragment_game_screen, container, false);
-        stopwatch = myView.findViewById(R.id.stopWatch);
-        scoreView = myView.findViewById(R.id.score);
+        stopwatch = myView.findViewById(R.id.game_stopWatch);
+        scoreView = myView.findViewById(R.id.game_score);
         moleId = new Integer[]{ R.id.mole1, R.id.mole2, R.id.mole3, R.id.mole4, R.id.mole5, R.id.mole6, R.id.mole7, R.id.mole8, R.id.mole9 };
         pipeId = new Integer[]{ R.id.pipe1, R.id.pipe2, R.id.pipe3, R.id.pipe4, R.id.pipe5, R.id.pipe6, R.id.pipe7, R.id.pipe8, R.id.pipe9 };
 
@@ -101,6 +96,7 @@ public class Game_screen extends Fragment {
         return animatorSet;
     }
 
+    @SuppressLint("HandlerLeak")
     public void setActionThread() {
         actionHandler = new Handler() {
             @Override

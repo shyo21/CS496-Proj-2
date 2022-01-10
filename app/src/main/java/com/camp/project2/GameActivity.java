@@ -6,21 +6,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.view.WindowManager;
-import android.util.Log;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import org.json.JSONObject;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.net.URL;
-
-import io.socket.client.IO;
-import io.socket.emitter.Emitter;
 
 public class GameActivity extends AppCompatActivity implements Game_screen.onClickScore {
 
