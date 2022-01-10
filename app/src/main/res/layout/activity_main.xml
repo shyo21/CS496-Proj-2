@@ -9,26 +9,39 @@
     tools:context=".MainActivity">
 
     <ImageButton
-        android:id="@+id/login"
-        android:layout_width="25dp"
-        android:layout_height="180dp"
+        android:id="@+id/main_loginButton"
+        android:layout_width="40dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginStart="5dp"
         android:background="@color/transparent"
         android:scaleType="centerInside"
         android:src="@drawable/login"
-        android:layout_marginStart="8dp"
-        app:layout_constraintStart_toEndOf="@+id/reg"
-        app:layout_constraintTop_toTopOf="@+id/guideline3"
+        app:layout_constraintStart_toEndOf="@+id/main_signUpButton"
+        app:layout_constraintTop_toBottomOf="@+id/pwd"
+        tools:ignore="ContentDescription,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+    <ImageButton
+        android:id="@+id/main_signUpButton"
+        android:layout_width="40dp"
+        android:layout_height="200dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="100dp"
+        android:background="@color/transparent"
+        android:scaleType="centerInside"
+        android:src="@drawable/signup"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pwd"
         tools:ignore="ContentDescription,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
     <EditText
         android:id="@+id/id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="208dp"
+        android:layout_marginTop="200dp"
+        android:layout_marginStart="80dp"
         android:hint="Enter ID"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0"
-        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="Autofill,HardcodedText,TextContrastCheck,TextFields,TouchTargetSizeCheck" />
 
@@ -36,38 +49,11 @@
         android:id="@+id/pwd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="30dp"
         android:hint="Enter Password"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0"
-        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/id"
         tools:ignore="Autofill,HardcodedText,TextContrastCheck,TextFields,TouchTargetSizeCheck" />
-
-    <ImageButton
-        android:id="@+id/reg"
-        android:layout_width="25dp"
-        android:layout_height="180dp"
-        android:background="@color/transparent"
-        android:scaleType="centerInside"
-        android:src="@drawable/signup"
-        android:layout_marginStart="5dp"
-        app:layout_constraintStart_toStartOf="@+id/guideline2"
-        app:layout_constraintTop_toTopOf="@+id/guideline3"
-        tools:ignore="ContentDescription,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.25" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="425dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

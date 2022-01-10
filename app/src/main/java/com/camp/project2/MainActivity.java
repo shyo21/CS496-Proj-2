@@ -1,17 +1,17 @@
 package com.camp.project2;
 
-import android.app.Activity;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import org.json.JSONException;
@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public RetrofitService myInterface;
     public Retrofit retrofit;
     //public Login_info login_info;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,12 +51,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         id = findViewById(R.id.id);
         pwd = findViewById(R.id.pwd);
-        login = findViewById(R.id.login);
+        login = findViewById(R.id.main_loginButton);
         login.setOnClickListener(this);
-        reg = findViewById(R.id.reg);
+        reg = findViewById(R.id.main_signUpButton);
         reg.setOnClickListener(this);
-
-
 
         //login_info = new Login_info(s_id, s_pwd);
 
@@ -70,15 +69,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 .client(clientBuilder.build())
                 .build();
         myInterface = retrofit.create(RetrofitService.class);
-
-
     }
 
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     public void onClick(View view){
         switch (view.getId()){
-            case R.id.login:
+            case R.id.main_loginButton:
                 System.out.println("we are here");
                 s_id = id.getText().toString();
                 s_pwd = pwd.getText().toString();
@@ -96,9 +94,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 call_post.enqueue(new Callback<ResponseBody>() {
                     @Override
-                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                    public void onResponse(@NonNull Call<ResponseBody> call, @NonNull Response<ResponseBody> response) {
                         if (response.isSuccessful()) {
                             try {
+                                assert response.body() != null;
                                 String result = response.body().string();
                                 Log.v(TAG, "result = " + result);
                                 Toast.makeText(getApplicationContext(), result, Toast.LENGTH_SHORT).show();
@@ -110,21 +109,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             userinfo.setuserid(s_id);
 
                             System.out.println("login id = " + s_id);
-                            changescreen();
+                            changeScreen();
                         } else {
-                            Log.v(TAG, "error = " + String.valueOf(response.code()));
-                            Toast.makeText(getApplicationContext(), "error = " + String.valueOf(response.code()), Toast.LENGTH_SHORT).show();
+                            Log.v(TAG, "error = " + response.code());
+                            Toast.makeText(getApplicationContext(), "error = " + response.code(), Toast.LENGTH_SHORT).show();
                         }
                     }
 
                     @Override
-                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+                    public void onFailure(@NonNull Call<ResponseBody> call, @NonNull Throwable t) {
                         Log.v(TAG, "Fail");
                         Toast.makeText(getApplicationContext(), "Response Fail", Toast.LENGTH_SHORT).show();
                     }
                 });
                 break;
-            case R.id.reg:
+            case R.id.main_signUpButton:
                 Intent intent2 = new Intent(this, SignActivity.class);
                 startActivity(intent2);
                 break;
@@ -132,7 +131,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-    public void changescreen(){
+    public void changeScreen(){
         Intent intent = new Intent(this, InitialActivity.class);
         startActivity(intent);
     }

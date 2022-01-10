@@ -1,12 +1,9 @@
 package com.camp.project2;
 
+import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +11,9 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
 
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.MultiFormatWriter;
@@ -24,19 +23,7 @@ import com.journeyapps.barcodescanner.BarcodeEncoder;
 
 import org.json.JSONObject;
 
-import java.io.IOException;
-import java.net.URL;
-
 import io.socket.client.Socket;
-import io.socket.emitter.Emitter;
-import okhttp3.ResponseBody;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
 
 
 public class Character_screen extends Fragment implements View.OnClickListener {
@@ -59,7 +46,6 @@ public class Character_screen extends Fragment implements View.OnClickListener {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // Inflate the layout for this fragment
         activity = (InitialActivity)getActivity();
     }
 
@@ -69,8 +55,8 @@ public class Character_screen extends Fragment implements View.OnClickListener {
         System.out.println("here");
         ViewGroup rootView = (ViewGroup)inflater.inflate(R.layout.fragment_character_screen, container, false);
 
-        make_room = rootView.findViewById(R.id.room_create_button);
-        find_room = rootView.findViewById(R.id.find_room);
+        make_room = rootView.findViewById(R.id.character_makeRoom);
+        find_room = rootView.findViewById(R.id.character_findRoom);
         characterview = rootView.findViewById(R.id.character_img);
         red_button = rootView.findViewById(R.id.red_button);
         red_button.setOnClickListener(this);
@@ -85,83 +71,70 @@ public class Character_screen extends Fragment implements View.OnClickListener {
         black_button = rootView.findViewById(R.id.black_button);
         black_button.setOnClickListener(this);
 
-        make_room.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                int position = activity.viewPager.getCurrentItem();
-                if(position == 0){
-                    socketInterface = new SocketInterface(getActivity());
-                    Socket mysocket = socketInterface.getinstance();
-                    socketInterface.createroom();
-                    mysocket.on("CREATEROOM", new Emitter.Listener() {
-                        @Override
-                        public void call(final Object... args) {
-                            getActivity().runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
+        make_room.setOnClickListener(view -> {
+            int position = activity.viewPager.getCurrentItem();
+            if(position == 0){
+                socketInterface = new SocketInterface(getActivity());
+                Socket mysocket = socketInterface.getinstance();
+                socketInterface.createroom();
+                mysocket.on("CREATEROOM", args -> requireActivity().runOnUiThread(() -> {
+                    try {
+                        JSONObject data = (JSONObject) args[0];
+                        System.out.println(data.getString("userid"));
+                        room_number = data.getString("room_num");
+                        address = "http://192.249.18.122:443/"+"room" + room_number;
+                        activity.r_screen.text = address;
+                        activity.r_screen.qrCode.setImageBitmap(qrCodeMaker(address));
+                        /*
+                        Retrofit retrofit = new RetrofitClient().getClient();
+                        RetrofitService myInterface = retrofit.create(RetrofitService.class);
+                        Call<ResponseBody> call_post = myInterface.logIn(s_id, s_pwd);
+
+
+                        call_post.enqueue(new Callback<ResponseBody>() {
+                            @Override
+                            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                                if (response.isSuccessful()) {
                                     try {
-                                        JSONObject data = (JSONObject) args[0];
-                                        System.out.println(data.getString("userid"));
-                                        room_number = data.getString("room_num");
-                                        address = "http://192.249.18.122:443/"+"room"+room_number;//roomnumber 추가
-                                        activity.r_screen.text = address;
-                                        activity.r_screen.qrCode.setImageBitmap(qrCodeMaker(address));
-                                        /*
-                                        Retrofit retrofit = new RetrofitClient().getClient();
-                                        RetrofitService myInterface = retrofit.create(RetrofitService.class);
-                                        Call<ResponseBody> call_post = myInterface.logIn(s_id, s_pwd);
-
-
-                                        call_post.enqueue(new Callback<ResponseBody>() {
-                                            @Override
-                                            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                                                if (response.isSuccessful()) {
-                                                    try {
-                                                        String result = response.body().string();
-                                                        Log.v(TAG, "result = " + result);
-                                                        Toast.makeText(getActivity().getApplicationContext(), result, Toast.LENGTH_SHORT).show();
-                                                    } catch (IOException e) {
-                                                        e.printStackTrace();
-                                                    }
-
-                                                } else {
-                                                    Log.v(TAG, "error = " + String.valueOf(response.code()));
-                                                    Toast.makeText(getActivity().getApplicationContext(), "error = " + String.valueOf(response.code()), Toast.LENGTH_SHORT).show();
-                                                }
-                                            }
-
-                                            @Override
-                                            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                                                Log.v(TAG, "Fail");
-                                                Toast.makeText(getActivity().getApplicationContext(), "Response Fail", Toast.LENGTH_SHORT).show();
-                                            }
-                                        });*/
-
-                                    } catch (Exception e) {
+                                        String result = response.body().string();
+                                        Log.v(TAG, "result = " + result);
+                                        Toast.makeText(getActivity().getApplicationContext(), result, Toast.LENGTH_SHORT).show();
+                                    } catch (IOException e) {
                                         e.printStackTrace();
                                     }
+
+                                } else {
+                                    Log.v(TAG, "error = " + String.valueOf(response.code()));
+                                    Toast.makeText(getActivity().getApplicationContext(), "error = " + String.valueOf(response.code()), Toast.LENGTH_SHORT).show();
                                 }
-                            });
-                        }
-                    });
-                    activity.viewPager.setCurrentItem(1, true);
-                }
-                else{
-                    activity.viewPager.setCurrentItem(0, true);
-                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                                Log.v(TAG, "Fail");
+                                Toast.makeText(getActivity().getApplicationContext(), "Response Fail", Toast.LENGTH_SHORT).show();
+                            }
+                        });*/
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }));
+                activity.viewPager.setCurrentItem(1, true);
+            }
+            else{
+                activity.viewPager.setCurrentItem(0, true);
             }
         });
 
-        find_room.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        find_room.setOnClickListener(view -> {
 
-            }
         });
 
         return rootView;
     }
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     public void onClick(View view){
         Userinfo userinfo = new Userinfo();
@@ -169,28 +142,28 @@ public class Character_screen extends Fragment implements View.OnClickListener {
             case R.id.red_button:
                 userinfo.setusercolor("red");
                 System.out.println("red");
-                characterview.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.red));
+                characterview.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.red));
                 break;
             case R.id.yellow_button:
                 userinfo.setusercolor("yellow");
                 System.out.println("yellow");
-                characterview.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.yellow));
+                characterview.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.yellow));
                 break;
             case R.id.green_button:
                 userinfo.setusercolor("green");
-                characterview.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.green));
+                characterview.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.green));
                 break;
             case R.id.blue_button:
                 userinfo.setusercolor("blue");
-                characterview.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.blue));
+                characterview.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.blue));
                 break;
             case R.id.purple_button:
                 userinfo.setusercolor("purple");
-                characterview.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.sky_blue));
+                characterview.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.sky_blue));
                 break;
             case R.id.black_button:
                 userinfo.setusercolor("black");
-                characterview.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.purple));
+                characterview.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.purple));
                 break;
         }
     }
