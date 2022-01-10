@@ -27,6 +27,7 @@ import java.util.ArrayList;
 
 
 public class Room_screen extends Fragment {
+    public boolean check = false;
     public View myView;
     public ImageView qrCode;
     public RecyclerView playerList;
@@ -57,8 +58,7 @@ public class Room_screen extends Fragment {
         adapter = new recyclerAdapter(mList);
         playerList.setAdapter(adapter);
 
-        addItem("red", "player1");
-
+        //addItem("white", "daegun");
         qrCode.setImageBitmap(qrCodeMaker(text));
 
         startButton.setOnClickListener(view -> {
@@ -104,12 +104,13 @@ public class Room_screen extends Fragment {
         return myView;
     }
 
-    public void addItem(String color, String name) {
+    public boolean addItem(String color, String name) {
         playerListItem item = new playerListItem();
         item.setIconColor(color);
         item.setUserName(name);
 
         mList.add(item);
+        return true;
     }
 
     private Bitmap qrCodeMaker(String url) {

@@ -63,6 +63,18 @@ public class SocketInterface extends AsyncTask {
         }
     }
 
+
+
+    public void addmember() {
+        JSONObject data = new JSONObject();
+        try {
+            data.put("userid", null);
+            data.put("usercolor", null);
+            mysocket.emit("ADDMEMBER", data);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
     public void createroom(){
         JSONObject data = new JSONObject();
         try{

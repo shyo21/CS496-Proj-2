@@ -130,6 +130,7 @@ public class Character_screen extends Fragment implements View.OnClickListener {
             Socket mysocket =socketInterface.getInstance();
             socketInterface.joinroom();
             int position2 = activity.viewPager.getCurrentItem();
+            /*
             mysocket.on("JOINROOM", args -> requireActivity().runOnUiThread(() -> {
                 try {
                     JSONObject data = (JSONObject) args[0];
@@ -138,10 +139,23 @@ public class Character_screen extends Fragment implements View.OnClickListener {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+            }));*/
+            socketInterface.addmember();
+
+            mysocket.on("ADDMEMBER", args -> requireActivity().runOnUiThread(() -> {
+                try {
+                    JSONObject data = (JSONObject) args[0];
+                    String id = data.getString("userid");
+                    String color = data.getString("usercolor");
+                    System.out.println("data = " + id);
+                    System.out.println("data color = " + color);
+                    activity.r_screen.check = activity.r_screen.addItem(color, id);
+                    System.out.println(activity.r_screen.check);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }));
-            if(position2 == 0){
-                activity.viewPager.setCurrentItem(1, true);
-            }
+
         });
 
         return rootView;
