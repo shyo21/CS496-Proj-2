@@ -1,12 +1,12 @@
 package com.camp.project2;
 
-public class Userinfo {
+public class User_Info {
     private static String userId = null;
     private static boolean login_check = false;
     private static String roomUrl = null;
     private static String userColor = "white";
 
-    public Userinfo(){ }
+    public User_Info(){ }
 
     public void setRoomUrl(String url){
         if(roomUrl == null){

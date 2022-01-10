@@ -8,7 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class Memory_screen extends Fragment {
+public class Memory_Fragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -20,6 +20,6 @@ public class Memory_screen extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_memory_screen, container, false);
+        return inflater.inflate(R.layout.fragment_memory, container, false);
     }
 }

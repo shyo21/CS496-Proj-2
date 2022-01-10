@@ -49,8 +49,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
         getWindow().setStatusBarColor(Color.TRANSPARENT);
 
-        id = findViewById(R.id.id);
-        pwd = findViewById(R.id.pwd);
+        id = findViewById(R.id.main_id);
+        pwd = findViewById(R.id.main_pwd);
         login = findViewById(R.id.main_loginButton);
         login.setOnClickListener(this);
         reg = findViewById(R.id.main_signUpButton);
@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 System.out.println("we are here");
                 s_id = id.getText().toString();
                 s_pwd = pwd.getText().toString();
-                Login_info login_info = new Login_info(s_id, s_pwd);
+                Login_Info login_info = new Login_Info(s_id, s_pwd);
                 JSONObject jsonObject = new JSONObject();
                 try {
                     jsonObject.put("id", "chackhangun");
@@ -104,7 +104,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
-                            Userinfo userinfo = new Userinfo();
+                            User_Info userinfo = new User_Info();
                             userinfo.set_login_check(true);
                             userinfo.setUserId(s_id);
 
@@ -132,7 +132,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void changeScreen(){
-        Intent intent = new Intent(this, InitialActivity.class);
+        Intent intent = new Intent(this, RoomActivity.class);
         startActivity(intent);
     }
 }

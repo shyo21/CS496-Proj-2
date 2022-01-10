@@ -7,9 +7,9 @@ import android.view.WindowManager;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class InitialActivity extends AppCompatActivity{
-    public Character_screen c_screen;
-    public Room_screen r_screen;
+public class RoomActivity extends AppCompatActivity{
+    public Character_Fragment c_screen;
+    public Room_Fragment r_screen;
     //onAttach() -> fragment를 activtiy에 attach
     //oncreate -> activtiy/ fragment 객체 생성 + 변수 초기화 시
     //oncreateview -> inflater를 사용해서 view를 불러와 view에 레이아웃을 매칭. view를 return.
@@ -33,18 +33,18 @@ public class InitialActivity extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState)  {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main2);
+        setContentView(R.layout.activity_room);
 
         getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
         getWindow().setStatusBarColor(Color.TRANSPARENT);
 
-        viewPager = findViewById(R.id.viewpager);
+        viewPager = findViewById(R.id.roomActivity_viewpager);
         viewPager.setPagingEnabled(false);
         viewpagerAdapter = new ViewpagerAdapter(getSupportFragmentManager());
 
-        c_screen = new Character_screen();
-        r_screen = new Room_screen();
+        c_screen = new Character_Fragment();
+        r_screen = new Room_Fragment();
 
         viewpagerAdapter.addItem(c_screen);
         viewpagerAdapter.addItem(r_screen);
