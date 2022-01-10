@@ -1,44 +1,52 @@
 package com.camp.project2;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
 public class recyclerAdapter extends RecyclerView.Adapter<recyclerAdapter.ViewHolder> {
 
-    private ArrayList<String> mData;
+    private final ArrayList<playerListItem> mData;
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+        ImageView color;
+        TextView name;
 
-        private final TextView textView;
         ViewHolder(View view) {
             super(view);
-            textView = view.findViewById(R.id.textView);
-        }
-
-        public TextView getTextView() {
-            return textView;
+            color = view.findViewById(R.id.playerColor);
+            name = view.findViewById(R.id.playerName);
         }
     }
 
-    public recyclerAdapter(ArrayList<String> list) {
+    public recyclerAdapter(ArrayList<playerListItem> list) {
         mData = list;
     }
 
+    @NonNull
     @Override
     public ViewHolder onCreateViewHolder (ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.playerlist, parent, false);
+        Context context = parent.getContext();
+        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+        View view = inflater.inflate(R.layout.playerlist,parent,false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.getTextView().setText(mData.get(position));
+        playerListItem item = mData.get(position);
+        holder.name.setText(item.getUserName());
     }
 
     @Override

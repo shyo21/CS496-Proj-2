@@ -6,7 +6,7 @@
     android:layout_height="wrap_content">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/playerName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
@@ -14,12 +14,12 @@
         android:text="TextView"
         android:textColor="@color/text"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
-        app:layout_constraintTop_toTopOf="@+id/imageView" />
+        app:layout_constraintBottom_toBottomOf="@+id/playerColor"
+        app:layout_constraintStart_toEndOf="@+id/playerColor"
+        app:layout_constraintTop_toTopOf="@+id/playerColor" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/playerColor"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginStart="2dp"

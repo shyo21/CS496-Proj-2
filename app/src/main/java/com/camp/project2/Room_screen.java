@@ -37,9 +37,10 @@ public class Room_screen extends Fragment {
     public RecyclerView playerList;
     public recyclerAdapter adapter;
     public String text;
-    public ArrayList<Integer> displaySize;
     public ImageButton startButton;
     public Userinfo userinfo;
+    public ArrayList<playerListItem> mList = new ArrayList<playerListItem>();
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,33 +56,15 @@ public class Room_screen extends Fragment {
         playerList = myView.findViewById(R.id.playerList);
         startButton = myView.findViewById(R.id.startButton);
 
-
-
-        displaySize = getDisplaySize();
-        int displayWidth = displaySize.get(0);
-        int displayHeight = displaySize.get(1);
-
-        ArrayList<String> list = new ArrayList<>();
-        for (int i=0; i<100; i++) {
-            list.add(i, String.format("TEXT %d", i));
-        }
-
         text = "http://google.com";
 
-        playerList.getLayoutParams().width = (int) (0.85 * displayWidth);
-        playerList.getLayoutParams().height = (int) (0.35 * displayHeight);
-        playerList.setHasFixedSize(true);
         playerList.setLayoutManager(new LinearLayoutManager(getActivity()));
-        adapter = new recyclerAdapter(list);
+        adapter = new recyclerAdapter(mList);
         playerList.setAdapter(adapter);
 
-        qrCode.getLayoutParams().width = (int) (0.3 * displayWidth);
-        qrCode.getLayoutParams().height = (int) (0.3 * displayWidth);
+        addItem("red", "player1");
+
         qrCode.setImageBitmap(qrCodeMaker(text));
-
-
-        startButton.getLayoutParams().width = (int) (0.13 * displayWidth);
-        startButton.getLayoutParams().height = (int) (0.3 * displayWidth);
 
         startButton.setOnClickListener(view -> {
             Intent intent = new Intent(getActivity(), GameActivity.class);
@@ -124,6 +107,14 @@ public class Room_screen extends Fragment {
             e.printStackTrace();
         }*/
         return myView;
+    }
+
+    public void addItem(String color, String name) {
+        playerListItem item = new playerListItem();
+        item.setIconColor(color);
+        item.setUserName(name);
+
+        mList.add(item);
     }
 
     private Bitmap qrCodeMaker(String url) {

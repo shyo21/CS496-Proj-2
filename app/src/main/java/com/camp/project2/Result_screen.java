@@ -54,8 +54,8 @@ public class Result_screen extends Fragment {
         roulette.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(myView.getContext());
         roulette.setLayoutManager(linearLayoutManager);
-        recyclerAdapter adapter = new recyclerAdapter(list);
-        roulette.setAdapter(adapter);
+        //recyclerAdapter adapter = new recyclerAdapter(list);
+        //roulette.setAdapter(adapter);
         LinearSnapHelper linearSnapHelper = new LinearSnapHelper();
         linearSnapHelper.attachToRecyclerView(roulette);
 

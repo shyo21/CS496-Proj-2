@@ -4,7 +4,7 @@ public class Userinfo {
     private static String userid = null;
     private static boolean login_check = false;
     private static String roomurl = null;
-    private static String usercolor = null;
+    private static String usercolor = "white";
 
     public Userinfo(){
 
