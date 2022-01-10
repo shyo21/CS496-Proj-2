@@ -74,8 +74,10 @@ public class SocketInterface extends AsyncTask {
         try{
             Userinfo userinfo = new Userinfo();
             String userid = userinfo.getuserid();
+            String usercolor = userinfo.getusercolor();
             System.out.println(userid);
             data.put("userid", userid);
+            data.put("usercolor", usercolor);
             mysocket.emit("CREATEROOM", data);
         }catch (Exception e){
             e.printStackTrace();
