@@ -14,4 +14,10 @@
     <color name="pink_white">#FFE2E2</color>
     <color name="pink_black">#FFC7C7</color>
     <color name="text">#312f33</color>
+    <color name="red">#c8636b</color>
+    <color name="yellow">#dcc770</color>
+    <color name="green">#7eb369</color>
+    <color name="blue">#628cb9</color>
+    <color name="sky_blue">#81bdca</color>
+    <color name="purple">#A881CA</color>
 </resources>

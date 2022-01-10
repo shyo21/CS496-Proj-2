@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -30,8 +31,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private final String TAG = "MainActivityLog";
     public EditText id;
     public EditText pwd;
-    public Button login;
-    public Button reg;
+    public ImageButton login;
+    public ImageButton reg;
     public String s_id;
     public String s_pwd;
     public RetrofitService myInterface;

@@ -1,20 +1,21 @@
 package com.camp.project2;
 
-import android.graphics.Color;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+
 
 public class Character_screen extends Fragment implements View.OnClickListener {
-    private Button screen_change;
+    private ImageButton make_room;
+    private ImageButton find_room;
     private Button red_button;
     private Button yellow_button;
     private Button green_button;
@@ -38,7 +39,8 @@ public class Character_screen extends Fragment implements View.OnClickListener {
         System.out.println("here");
         ViewGroup rootView = (ViewGroup)inflater.inflate(R.layout.fragment_character_screen, container, false);
 
-        screen_change = rootView.findViewById(R.id.room_create_button);
+        make_room = rootView.findViewById(R.id.room_create_button);
+        find_room = rootView.findViewById(R.id.find_room);
         characterview = rootView.findViewById(R.id.character_img);
         red_button = rootView.findViewById(R.id.red_button);
         red_button.setOnClickListener(this);
@@ -53,7 +55,7 @@ public class Character_screen extends Fragment implements View.OnClickListener {
         black_button = rootView.findViewById(R.id.black_button);
         black_button.setOnClickListener(this);
 
-        screen_change.setOnClickListener(new View.OnClickListener() {
+        make_room.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 int position = activity.viewPager.getCurrentItem();
@@ -67,6 +69,14 @@ public class Character_screen extends Fragment implements View.OnClickListener {
                 }
             }
         });
+
+        find_room.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
         return rootView;
     }
 
@@ -74,22 +84,22 @@ public class Character_screen extends Fragment implements View.OnClickListener {
     public void onClick(View view){
         switch (view.getId()){
             case R.id.red_button:
-                characterview.setBackgroundColor(Color.parseColor("#F44336"));
+                characterview.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.red));
                 break;
             case R.id.yellow_button:
-                characterview.setBackgroundColor(Color.parseColor("#FFEB3B"));
+                characterview.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.yellow));
                 break;
             case R.id.green_button:
-                characterview.setBackgroundColor(Color.parseColor("#42FF3B"));
+                characterview.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.green));
                 break;
             case R.id.blue_button:
-                characterview.setBackgroundColor(Color.parseColor("#3B4FFF"));
+                characterview.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.blue));
                 break;
             case R.id.purple_button:
-                characterview.setBackgroundColor(Color.parseColor("#D505CA"));
+                characterview.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.sky_blue));
                 break;
             case R.id.black_button:
-                characterview.setBackgroundColor(Color.parseColor("#020202"));
+                characterview.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.purple));
                 break;
         }
     }
