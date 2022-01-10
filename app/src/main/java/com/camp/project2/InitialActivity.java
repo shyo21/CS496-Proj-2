@@ -7,7 +7,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
 
+import org.json.JSONObject;
+
+import io.socket.client.Socket;
+import io.socket.emitter.Emitter;
+
 public class InitialActivity extends AppCompatActivity{
+    public Character_screen c_screen;
+    public Room_screen r_screen;
     //onAttach() -> fragment를 activtiy에 attach
     //oncreate -> activtiy/ fragment 객체 생성 + 변수 초기화 시
     //oncreateview -> inflater를 사용해서 view를 불러와 view에 레이아웃을 매칭. view를 return.
@@ -28,7 +35,6 @@ public class InitialActivity extends AppCompatActivity{
     //page adapter는 abstract class
     private ViewpagerAdapter viewpagerAdapter;
     public MyViewPager viewPager;
-
     @Override
     protected void onCreate(Bundle savedInstanceState)  {
         super.onCreate(savedInstanceState);
@@ -42,8 +48,8 @@ public class InitialActivity extends AppCompatActivity{
         viewPager.setPagingEnabled(false);
         viewpagerAdapter = new ViewpagerAdapter(getSupportFragmentManager());
 
-        Character_screen c_screen = new Character_screen();
-        Room_screen r_screen = new Room_screen();
+        c_screen = new Character_screen();
+        r_screen = new Room_screen();
 
         viewpagerAdapter.addItem(c_screen);
         viewpagerAdapter.addItem(r_screen);

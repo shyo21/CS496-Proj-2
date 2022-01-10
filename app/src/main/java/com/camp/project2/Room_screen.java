@@ -8,7 +8,6 @@ import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
@@ -26,24 +25,26 @@ import com.journeyapps.barcodescanner.BarcodeEncoder;
 
 import org.json.JSONObject;
 
-import java.net.URL;
 import java.util.ArrayList;
 
-import io.socket.client.IO;
+import io.socket.client.Socket;
 import io.socket.emitter.Emitter;
 
+
 public class Room_screen extends Fragment {
-    View myView;
-    ImageView qrCode;
-    RecyclerView playerList;
-    recyclerAdapter adapter;
-    String text;
-    ArrayList<Integer> displaySize;
-    ImageButton startButton;
-    private static io.socket.client.Socket mysocket;
+    public View myView;
+    public ImageView qrCode;
+    public RecyclerView playerList;
+    public recyclerAdapter adapter;
+    public String text;
+    public ArrayList<Integer> displaySize;
+    public ImageButton startButton;
+    public Userinfo userinfo;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        userinfo = new Userinfo();
+
     }
 
     @Nullable
@@ -54,6 +55,8 @@ public class Room_screen extends Fragment {
         playerList = myView.findViewById(R.id.playerList);
         startButton = myView.findViewById(R.id.startButton);
 
+
+
         displaySize = getDisplaySize();
         int displayWidth = displaySize.get(0);
         int displayHeight = displaySize.get(1);
@@ -63,7 +66,7 @@ public class Room_screen extends Fragment {
             list.add(i, String.format("TEXT %d", i));
         }
 
-        text = "https://google.com";
+        text = "http://google.com";
 
         playerList.getLayoutParams().width = (int) (0.85 * displayWidth);
         playerList.getLayoutParams().height = (int) (0.35 * displayHeight);
@@ -76,6 +79,7 @@ public class Room_screen extends Fragment {
         qrCode.getLayoutParams().height = (int) (0.3 * displayWidth);
         qrCode.setImageBitmap(qrCodeMaker(text));
 
+
         startButton.getLayoutParams().width = (int) (0.13 * displayWidth);
         startButton.getLayoutParams().height = (int) (0.3 * displayWidth);
 
@@ -85,7 +89,7 @@ public class Room_screen extends Fragment {
         });
 
 
-        System.out.println("gameactivity.java 42");
+        /*
         try {
             System.out.println("소켓 연결 직");
             URL url = new URL("http://192.249.18.122:443");
@@ -109,8 +113,6 @@ public class Room_screen extends Fragment {
                     });
                 }
             });
-
-            System.out.println("여기");
             JSONObject data = new JSONObject();
             try {
                 data.put("message", "master");
@@ -120,7 +122,7 @@ public class Room_screen extends Fragment {
             }
         } catch (Exception e) {
             e.printStackTrace();
-        }
+        }*/
         return myView;
     }
 

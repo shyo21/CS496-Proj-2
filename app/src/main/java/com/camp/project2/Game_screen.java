@@ -42,9 +42,8 @@ public class Game_screen extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
-
+        //socketInterface = new SocketInterface(getActivity());
+        //socketInterface.sendtest();
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -79,6 +78,7 @@ public class Game_screen extends Fragment {
     }
 
     public void setOnClickListeners(ImageButton[] imageArray) {
+
         for (ImageButton currentButton : imageArray) {
             currentButton.setOnClickListener(view -> {
                 if (view.getTag().toString().equals("on")) {

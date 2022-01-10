@@ -1,5 +1,6 @@
 package com.camp.project2;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -103,6 +104,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
+                            Userinfo userinfo = new Userinfo();
+                            userinfo.setlogin_check(true);
+                            userinfo.setuserid(s_id);
+
+                            System.out.println("login id = " + s_id);
                             changescreen();
                         } else {
                             Log.v(TAG, "error = " + String.valueOf(response.code()));
