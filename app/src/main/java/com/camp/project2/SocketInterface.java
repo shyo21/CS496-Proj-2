@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.AsyncTask;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.net.URL;
@@ -64,17 +65,6 @@ public class SocketInterface extends AsyncTask {
     }
 
 
-
-    public void addmember() {
-        JSONObject data = new JSONObject();
-        try {
-            data.put("userid", null);
-            data.put("usercolor", null);
-            mysocket.emit("ADDMEMBER", data);
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-    }
     public void createroom(){
         JSONObject data = new JSONObject();
         try{
@@ -86,6 +76,56 @@ public class SocketInterface extends AsyncTask {
             data.put("usercolor", usercolor);
             mysocket.emit("CREATEROOM", data);
         }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public void asktable(){
+        JSONObject data = new JSONObject();
+        try{
+            data.put("num", new String());
+            mysocket.emit("ASKTABLE",data);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public void showmember(){
+        JSONObject data = new JSONObject();
+        try{
+            data.put("one", new JSONObject());
+            data.put("two", new JSONObject());
+            data.put("three", new JSONObject());
+            data.put("four", new JSONObject());
+
+            mysocket.emit("SHOWMEMBER", data);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public void line(int num){
+        JSONObject data = new JSONObject();
+        try{
+            data.put("ref", num);
+            data.put("id", new String());
+            data.put("color", new String());
+            mysocket.emit("LINE",data);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public void score(){
+        JSONObject data = new JSONObject();
+        try{
+            User_Info user_info = new User_Info();
+            int score = user_info.getScore();
+            String userid = user_info.getUserId();
+            data.put("userid", userid);
+            data.put("score", score);
+            mysocket.emit("SCORE",data);
+        }catch(Exception e){
             e.printStackTrace();
         }
     }

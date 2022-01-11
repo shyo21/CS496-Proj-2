@@ -1,5 +1,8 @@
 package com.camp.project2;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.DELETE;
@@ -23,6 +26,10 @@ public interface RetrofitService {
     @FormUrlEncoded
     @POST("/login") //메세지를 body에 담아서 전달. POST로 데이터를 전송할때에는 Body영역 데이터 타입을 Header Content-Type에 명시를 해줘야 합니다.
     Call<ResponseBody> logIn(@Field("userid") String userid, @Field("userpwd") String userpwd );
+
+    @FormUrlEncoded
+    @POST("/table") //메세지를 body에 담아서 전달. POST로 데이터를 전송할때에는 Body영역 데이터 타입을 Header Content-Type에 명시를 해줘야 합니다.
+    Call<List<Otherinfo>> askTable(@Field("table") String req);
 
     @FormUrlEncoded
     @PUT("/retrofit/put/{id}") //

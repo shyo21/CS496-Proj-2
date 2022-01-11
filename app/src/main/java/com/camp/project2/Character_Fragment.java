@@ -4,25 +4,43 @@ import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.PowerManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.journeyapps.barcodescanner.BarcodeEncoder;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.IOException;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
+
 import io.socket.client.Socket;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 public class Character_Fragment extends Fragment implements View.OnClickListener {
     private final String TAG = "CharacterScreenLog";
@@ -38,7 +56,7 @@ public class Character_Fragment extends Fragment implements View.OnClickListener
     public SocketInterface socketInterface;
     public String room_number = null;
     public String address = null;
-
+    public int a = 0;
     RoomActivity activity;
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -50,8 +68,7 @@ public class Character_Fragment extends Fragment implements View.OnClickListener
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         System.out.println("here");
-        ViewGroup rootView = (ViewGroup)inflater.inflate(R.layout.fragment_character, container, false);
-
+        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_character, container, false);
         make_room = rootView.findViewById(R.id.character_makeRoom);
         find_room = rootView.findViewById(R.id.character_findRoom);
         find_room.setOnClickListener(this);
@@ -71,7 +88,7 @@ public class Character_Fragment extends Fragment implements View.OnClickListener
 
         make_room.setOnClickListener(view -> {
             int position = activity.viewPager.getCurrentItem();
-            if(position == 0){
+            if (position == 0) {
                 socketInterface = new SocketInterface(getActivity());
                 Socket mysocket = socketInterface.getInstance();
                 socketInterface.createroom();
@@ -80,84 +97,77 @@ public class Character_Fragment extends Fragment implements View.OnClickListener
                         JSONObject data = (JSONObject) args[0];
                         System.out.println(data.getString("userid"));
                         room_number = data.getString("room_num");
-                        address = "http://192.249.18.122:443/"+"room" + room_number;
+                        address = "http://192.249.18.122:443/" + "room" + room_number;
                         activity.r_screen.text = address;
                         activity.r_screen.qrCode.setImageBitmap(qrCodeMaker(address));
-                        /*
-                        Retrofit retrofit = new RetrofitClient().getClient();
-                        RetrofitService myInterface = retrofit.create(RetrofitService.class);
-                        Call<ResponseBody> call_post = myInterface.logIn(s_id, s_pwd);
-
-
-                        call_post.enqueue(new Callback<ResponseBody>() {
-                            @Override
-                            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                                if (response.isSuccessful()) {
-                                    try {
-                                        String result = response.body().string();
-                                        Log.v(TAG, "result = " + result);
-                                        Toast.makeText(getActivity().getApplicationContext(), result, Toast.LENGTH_SHORT).show();
-                                    } catch (IOException e) {
-                                        e.printStackTrace();
-                                    }
-
-                                } else {
-                                    Log.v(TAG, "error = " + String.valueOf(response.code()));
-                                    Toast.makeText(getActivity().getApplicationContext(), "error = " + String.valueOf(response.code()), Toast.LENGTH_SHORT).show();
-                                }
-                            }
-
-                            @Override
-                            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                                Log.v(TAG, "Fail");
-                                Toast.makeText(getActivity().getApplicationContext(), "Response Fail", Toast.LENGTH_SHORT).show();
-                            }
-                        });*/
 
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
                 }));
                 activity.viewPager.setCurrentItem(1, true);
-            }
-            else{
+            } else {
                 activity.viewPager.setCurrentItem(0, true);
             }
         });
 
         find_room.setOnClickListener(view -> {
             socketInterface = new SocketInterface(getActivity());
-            Socket mysocket =socketInterface.getInstance();
+            Socket mysocket = socketInterface.getInstance();
             socketInterface.joinroom();
             int position2 = activity.viewPager.getCurrentItem();
-            /*
-            mysocket.on("JOINROOM", args -> requireActivity().runOnUiThread(() -> {
+            socketInterface.showmember();
+
+            mysocket.on("SHOWMEMBER",args -> requireActivity().runOnUiThread(() -> {
                 try {
                     JSONObject data = (JSONObject) args[0];
-                    System.out.println(data.getString("userid"));
-                    room_number = data.getString("color");
+                    String ONE = data.getString("one");
+                    System.out.println(ONE);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-            }));*/
-            socketInterface.addmember();
-
-            mysocket.on("ADDMEMBER", args -> requireActivity().runOnUiThread(() -> {
+            }));
+            /*
+            socketInterface.asktable();
+            mysocket.on("ASKTABLE", args -> requireActivity().runOnUiThread(() -> {
                 try {
                     JSONObject data = (JSONObject) args[0];
-                    String id = data.getString("userid");
-                    String color = data.getString("usercolor");
-                    System.out.println("data = " + id);
-                    System.out.println("data color = " + color);
-                    activity.r_screen.check = activity.r_screen.addItem(color, id);
-                    System.out.println(activity.r_screen.check);
+                    String number = data.getString("num");
+                    for(int j = 0; j < 5; j ++){
+                        if(String.valueOf(j).equals(number)){
+                            a = j;
+                            break;
+                        }
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }));
 
-        });
+            for(int b = 0; b < a; b++){
+                socketInterface.line(b);
+                mysocket.on("LINE", args -> requireActivity().runOnUiThread(() -> {
+                    try {
+                        JSONObject data = (JSONObject) args[0];
+                        String number = data.getString("num");
+                        //String id = data.get("id");
 
+
+                        for(int j = 0; j < 5; j ++){
+                            if(String.valueOf(j).equals(number)){
+                                a = j;
+                                break;
+                            }
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }));
+            }
+            */
+
+            activity.viewPager.setCurrentItem(1, true);
+        });
         return rootView;
     }
 

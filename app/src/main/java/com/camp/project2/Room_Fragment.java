@@ -34,6 +34,10 @@ public class Room_Fragment extends Fragment {
     public String text;
     public ImageButton startButton;
     public User_Info userinfo;
+    public LayoutInflater li;
+    public ViewGroup vg;
+    public Bundle bu;
+    public boolean check = false;
     public ArrayList<Room_PlayerInfo> mList = new ArrayList<>();
 
     @Override
@@ -46,6 +50,9 @@ public class Room_Fragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        li = inflater;
+        vg = container;
+        bu = savedInstanceState;
         myView = inflater.inflate(R.layout.fragment_room, container, false);
         qrCode = myView.findViewById(R.id.room_qrCode);
         playerList = myView.findViewById(R.id.room_playerList);
@@ -57,7 +64,13 @@ public class Room_Fragment extends Fragment {
         adapter = new Room_RecyclerAdapter(mList);
         playerList.setAdapter(adapter);
 
-        //addItem("white", "daegun");
+        User_Info user_info = new User_Info();
+        if(check == false){
+            String color = user_info.getUserColor();
+            String id = user_info.getUserId();
+            addItem(color, id);
+        }
+
         qrCode.setImageBitmap(qrCodeMaker(text));
 
         startButton.setOnClickListener(view -> {
@@ -109,6 +122,10 @@ public class Room_Fragment extends Fragment {
         item.setUserName(name);
 
         mList.add(item);
+    }
+
+    public void refresh(){
+        this.onCreateView(li, vg, bu);
     }
 
     private Bitmap qrCodeMaker(String url) {

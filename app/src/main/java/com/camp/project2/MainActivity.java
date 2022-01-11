@@ -81,13 +81,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 s_id = id.getText().toString();
                 s_pwd = pwd.getText().toString();
                 Login_Info login_info = new Login_Info(s_id, s_pwd);
-                JSONObject jsonObject = new JSONObject();
-                try {
-                    jsonObject.put("id", "chackhangun");
-                    jsonObject.put("pwd", "asdf6743");
-                }catch (JSONException e){
-                    e.printStackTrace();
-                }
+
                 Call<ResponseBody> call_post = myInterface.logIn(s_id, s_pwd);
                 //Call<ResponseBody> call_post = myInterface.postFunc(jsonObject);
                 //Call<ResponseBody> call_post = myInterface.logIn(login_info);
