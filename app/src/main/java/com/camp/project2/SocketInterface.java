@@ -15,22 +15,9 @@ import io.socket.client.Socket;
 //mSocket.emit("EVENT_NAME",data) 데이터 담아서 이벤트 발생시키기
 //mSocket.emit("EVENT_NAME"): 데이터없이 이벤트 발생시키기
 //mSocket.on(“EVENT_NAME”,mListener) : 리스너(콜백함수 포함) 서버에서 이벤트 발생시켰을 때 리스터 함수가 실행된다.
-public class SocketInterface extends AsyncTask {
+public class SocketInterface{
     private static Socket mysocket = null;
-    @SuppressLint("StaticFieldLeak")
-    private static Activity act = null;
-
-    @Override
-    protected Object doInBackground(Object[] objects) {
-        onProgressUpdate(1);
-        return null;
-    }
-
-    protected void onProgressUpdate(int value) {
-        System.out.println("function operating");
-
-    }
-
+    private static Activity act;
     public SocketInterface(Activity activity) {
         if(act == null){
             act = activity;
@@ -64,6 +51,16 @@ public class SocketInterface extends AsyncTask {
         }
     }
 
+    public void play(){
+        JSONObject data = new JSONObject();
+        try{
+            String play = "on";
+            data.put("command", play);
+            mysocket.emit("PLAY", data);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
 
     public void createroom(){
         JSONObject data = new JSONObject();
@@ -128,5 +125,12 @@ public class SocketInterface extends AsyncTask {
         }catch(Exception e){
             e.printStackTrace();
         }
+    }
+
+    public void result(){
+        JSONObject data = new JSONObject();
+        //try{
+
+        //}
     }
 }

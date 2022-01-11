@@ -137,56 +137,7 @@ public class Character_Fragment extends Fragment implements View.OnClickListener
             Socket mysocket = socketInterface.getInstance();
             socketInterface.joinroom();
             int position2 = activity.viewPager.getCurrentItem();
-            socketInterface.showmember();
-
-            mysocket.on("SHOWMEMBER",args -> requireActivity().runOnUiThread(() -> {
-                try {
-                    JSONObject data = (JSONObject) args[0];
-                    String ONE = data.getString("one");
-                    System.out.println(ONE);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }));
-            /*
-            socketInterface.asktable();
-            mysocket.on("ASKTABLE", args -> requireActivity().runOnUiThread(() -> {
-                try {
-                    JSONObject data = (JSONObject) args[0];
-                    String number = data.getString("num");
-                    for(int j = 0; j < 5; j ++){
-                        if(String.valueOf(j).equals(number)){
-                            a = j;
-                            break;
-                        }
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }));
-
-            for(int b = 0; b < a; b++){
-                socketInterface.line(b);
-                mysocket.on("LINE", args -> requireActivity().runOnUiThread(() -> {
-                    try {
-                        JSONObject data = (JSONObject) args[0];
-                        String number = data.getString("num");
-                        //String id = data.get("id");
-
-
-                        for(int j = 0; j < 5; j ++){
-                            if(String.valueOf(j).equals(number)){
-                                a = j;
-                                break;
-                            }
-                        }
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }));
-            }
-            */
-
+            //socketInterface.showmember();
             activity.viewPager.setCurrentItem(1, true);
         });
 

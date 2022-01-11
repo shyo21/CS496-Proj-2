@@ -11,6 +11,10 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import org.json.JSONObject;
+
+import io.socket.client.Socket;
+
 public class GameActivity extends AppCompatActivity implements Game_Fragment.onClickScore {
 
     private MyViewPager viewPager;
@@ -20,6 +24,8 @@ public class GameActivity extends AppCompatActivity implements Game_Fragment.onC
     public Thread timerThread;
     public int time = 30;
     public Activity act;
+    public SocketInterface socketInterface;
+    public Socket mysocket;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -65,11 +71,34 @@ public class GameActivity extends AppCompatActivity implements Game_Fragment.onC
                 if(time == 0){
                     User_Info user_info = new User_Info();
                     user_info.setscore(g_screen.scoreValue);
-                    SocketInterface socketInterface = new SocketInterface(act);
-                    socketInterface.getInstance();
+                    socketInterface = new SocketInterface(act);
+                    mysocket = socketInterface.getInstance();
                     socketInterface.score();
                 }
                 g_screen.timeEnded = true;
+
+                /*mysocket.on("SCORE", args->runOnUiThread(() -> {
+                    try {
+                        JSONObject data = (JSONObject) args[0];
+                        System.out.println(data.getString("userid"));
+                        data.info
+
+
+
+
+
+
+
+
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }));
+                    */
+
+
+
                 viewPager.setCurrentItem(1, true);
             }
         }
