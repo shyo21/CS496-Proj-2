@@ -54,9 +54,7 @@ public class Game_Fragment extends Fragment {
         for (int i = 0; i < moleArray.length; i++) {
             moleArray[i] = myView.findViewById(moleId[i]);
             moleArray[i].setTag("off");
-            //moleArray[i].setVisibility(View.INVISIBLE);
             pipeArray[i] = myView.findViewById(pipeId[i]);
-            //pipeArray[i].setVisibility(View.INVISIBLE);
         }
 
         setOnClickListeners(moleArray);

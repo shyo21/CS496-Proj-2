@@ -1,6 +1,7 @@
 package com.camp.project2;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,6 +45,17 @@ public class Room_RecyclerAdapter extends RecyclerView.Adapter<Room_RecyclerAdap
     public void onBindViewHolder(ViewHolder holder, int position) {
         Room_PlayerInfo item = mData.get(position);
         holder.name.setText(item.getUserName());
+
+        String dataColor = item.getIconColor();
+        switch (dataColor) {
+            case "white" : holder.color.setBackgroundColor(Color.parseColor("#FFFFFFFF"));
+            case "red" : holder.color.setBackgroundColor(Color.parseColor("#c8636b"));
+            case "yellow" : holder.color.setBackgroundColor(Color.parseColor("#dcc770"));
+            case "green" : holder.color.setBackgroundColor(Color.parseColor("#7eb369"));
+            case "blue" : holder.color.setBackgroundColor(Color.parseColor("#628cb9"));
+            case "purple" : holder.color.setBackgroundColor(Color.parseColor("#81bdca"));
+            case "black" : holder.color.setBackgroundColor(Color.parseColor("#A881CA"));
+        }
     }
 
     @Override
