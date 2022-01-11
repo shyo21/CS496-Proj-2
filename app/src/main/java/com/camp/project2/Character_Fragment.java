@@ -1,6 +1,7 @@
 package com.camp.project2;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -28,6 +29,7 @@ public class Character_Fragment extends Fragment implements View.OnClickListener
     private final String TAG = "CharacterScreenLog";
     private ImageButton make_room;
     private ImageButton find_room;
+    private ImageButton memory;
     private Button red_button;
     private Button yellow_button;
     private Button green_button;
@@ -54,6 +56,7 @@ public class Character_Fragment extends Fragment implements View.OnClickListener
 
         make_room = rootView.findViewById(R.id.character_makeRoom);
         find_room = rootView.findViewById(R.id.character_findRoom);
+        memory = rootView.findViewById(R.id.character_memory);
         find_room.setOnClickListener(this);
         characterview = rootView.findViewById(R.id.character_img);
         red_button = rootView.findViewById(R.id.red_button);
@@ -142,6 +145,11 @@ public class Character_Fragment extends Fragment implements View.OnClickListener
             if(position2 == 0){
                 activity.viewPager.setCurrentItem(1, true);
             }
+        });
+
+        memory.setOnClickListener(view -> {
+            Intent intent = new Intent(getActivity(),qrScanActivity.class);
+            startActivity(intent);
         });
 
         return rootView;

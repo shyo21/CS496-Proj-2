@@ -17,7 +17,7 @@ public class GameActivity extends AppCompatActivity implements Game_Fragment.onC
     public Result_Fragment r_screen;
     public Handler timerHandler;
     public Thread timerThread;
-    public int time = 30;
+    public int time = 10;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

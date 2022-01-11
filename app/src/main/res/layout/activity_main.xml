@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/background"
     android:fitsSystemWindows="true"
-    tools:context=".MainActivity">
+    tools:context=".qrScanActivity">
 
     <ImageButton
         android:id="@+id/main_loginButton"

@@ -23,7 +23,9 @@ public class Result_Fragment extends Fragment {
 
     View myView;
     RecyclerView roulette;
+    RecyclerView playerList;
     Button button;
+    public ArrayList<Result_PlayerInfo> mList;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -35,13 +37,36 @@ public class Result_Fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         myView = inflater.inflate(R.layout.fragment_result, container, false);
-        roulette = myView.findViewById(R.id.roulette);
+        playerList = myView.findViewById(R.id.result_playerList);
+        roulette = myView.findViewById(R.id.result_roulette);
         button = myView.findViewById(R.id.button);
 
         setRouletteView(roulette);
+        setPlayerListView(playerList);
+
+        addItem("white","player1",100);
+
         button.setOnClickListener(view -> setRouletteAction(roulette));
 
         return myView;
+    }
+
+    private void setPlayerListView(RecyclerView playerList) {
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(myView.getContext());
+        playerList.setLayoutManager(linearLayoutManager);
+        Result_RecyclerAdapter adapter = new Result_RecyclerAdapter(mList);
+        playerList.setAdapter(adapter);
+        LinearSnapHelper linearSnapHelper = new LinearSnapHelper();
+        linearSnapHelper.attachToRecyclerView(playerList);
+    }
+
+    private void addItem(String color, String name, Integer score) {
+        Result_PlayerInfo item = new Result_PlayerInfo();
+        item.setIconColor(color);
+        item.setUserName(name);
+        item.setUserScore(score);
+
+        mList.add(item);
     }
 
     private void setRouletteView(RecyclerView roulette) {
@@ -54,7 +79,7 @@ public class Result_Fragment extends Fragment {
         roulette.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(myView.getContext());
         roulette.setLayoutManager(linearLayoutManager);
-        //recyclerAdapter adapter = new recyclerAdapter(list);
+        //Result_RecyclerAdapter adapter = new Result_RecyclerAdapter(list);
         //roulette.setAdapter(adapter);
         LinearSnapHelper linearSnapHelper = new LinearSnapHelper();
         linearSnapHelper.attachToRecyclerView(roulette);

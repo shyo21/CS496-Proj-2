@@ -82,7 +82,7 @@ public class SignActivity extends AppCompatActivity implements View.OnClickListe
                     Toast.makeText(getApplicationContext(), "Response Fail", Toast.LENGTH_SHORT).show();
                 }
             });
-            Intent intent2 = new Intent(this, MainActivity.class);
+            Intent intent2 = new Intent(this, qrScanActivity.class);
             startActivity(intent2);
         }
     }

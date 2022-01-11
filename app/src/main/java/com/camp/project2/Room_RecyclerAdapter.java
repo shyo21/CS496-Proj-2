@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 public class Room_RecyclerAdapter extends RecyclerView.Adapter<Room_RecyclerAdapter.ViewHolder> {
-
     private final ArrayList<Room_PlayerInfo> mData;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
