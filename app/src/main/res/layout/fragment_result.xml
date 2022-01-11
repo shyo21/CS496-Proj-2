@@ -7,36 +7,60 @@
     android:background="@color/background"
     android:fitsSystemWindows="true">
 
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="355dp"
+        android:layout_height="191dp"
+        android:layout_marginTop="20dp"
+        android:scaleType="centerInside"
+        app:layout_constraintEnd_toEndOf="@+id/result_playerList"
+        app:layout_constraintStart_toStartOf="@+id/result_playerList"
+        app:layout_constraintTop_toBottomOf="@+id/result_playerList"
+        app:srcCompat="@drawable/rouletteback" />
+
+    <ImageView
+        android:id="@+id/winner"
+        android:layout_width="316dp"
+        android:layout_height="102dp"
+        android:layout_marginTop="80dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/winner"
+        tools:ignore="ContentDescription" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/result_playerList"
         android:layout_width="275dp"
         android:layout_height="300dp"
-        android:layout_marginTop="130dp"
         android:nestedScrollingEnabled="true"
+        android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/winner" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/result_roulette"
         android:layout_width="275dp"
         android:layout_height="45dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="45dp"
+        android:background="@color/sky_blue"
         android:nestedScrollingEnabled="false"
-        app:layout_constraintEnd_toEndOf="@+id/result_playerList"
-        app:layout_constraintStart_toStartOf="@+id/result_playerList"
-        app:layout_constraintTop_toBottomOf="@+id/result_playerList" />
+        app:layout_constraintEnd_toEndOf="@+id/imageView"
+        app:layout_constraintStart_toStartOf="@+id/imageView"
+        app:layout_constraintTop_toTopOf="@+id/imageView" />
 
     <ImageButton
         android:id="@+id/button"
-        android:layout_width="180dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="8dp"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="15dp"
         android:background="@color/transparent"
         android:scaleType="centerInside"
         android:src="@drawable/spin"
         app:layout_constraintEnd_toEndOf="@+id/result_roulette"
         app:layout_constraintStart_toStartOf="@+id/result_roulette"
         app:layout_constraintTop_toBottomOf="@+id/result_roulette"
-        tools:ignore="ContentDescription" />
+        tools:ignore="ContentDescription,SpeakableTextPresentCheck" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

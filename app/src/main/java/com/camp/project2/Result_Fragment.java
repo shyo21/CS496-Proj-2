@@ -97,7 +97,10 @@ public class Result_Fragment extends Fragment {
         list.add("병샷");
         list.add("앞구르기 한바퀴");
         list.add("딱밤한대");
-        list.add("뭐하지");
+        list.add("노래한곡");
+        list.add("사장님께 인사하고오기");
+        list.add("옆자리에서 술얻어먹기");
+        list.add("안주하나 사기");
 
         for (int i = 0; i < 100; i++){
             returnList.addAll(list);

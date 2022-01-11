@@ -9,25 +9,14 @@
     android:fitsSystemWindows="true">
 
     <ImageView
-        android:id="@+id/character_background"
-        android:layout_width="330dp"
-        android:layout_height="330dp"
-        android:layout_marginTop="200dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/chback"
-        tools:ignore="ContentDescription" />
-
-    <ImageView
         android:id="@+id/character_img"
         android:layout_width="250dp"
         android:layout_height="250dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="250dp"
         android:scaleType="centerCrop"
-        app:layout_constraintEnd_toEndOf="@+id/character_background"
-        app:layout_constraintStart_toStartOf="@+id/character_background"
-        app:layout_constraintTop_toTopOf="@+id/character_background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/among_us"
         tools:ignore="ContentDescription" />
 
@@ -35,49 +24,46 @@
         android:id="@+id/character_makeRoom"
         android:layout_width="50dp"
         android:layout_height="250dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginStart="60dp"
         android:background="@color/transparent"
         android:scaleType="centerInside"
         android:src="@drawable/makeroom"
-        app:layout_constraintStart_toStartOf="@id/character_background"
-        app:layout_constraintTop_toBottomOf="@+id/character_background"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/character_colorBar"
         tools:ignore="ContentDescription,SpeakableTextPresentCheck,ImageContrastCheck" />
 
     <ImageButton
         android:id="@+id/character_enterRoom"
         android:layout_width="50dp"
         android:layout_height="250dp"
-        android:layout_marginTop="10dp"
         android:background="@color/transparent"
         android:scaleType="centerInside"
         android:src="@drawable/enterroom"
         app:layout_constraintLeft_toRightOf="@+id/character_makeRoom"
-        app:layout_constraintTop_toBottomOf="@+id/character_background"
+        app:layout_constraintTop_toTopOf="@+id/character_makeRoom"
         tools:ignore="ContentDescription,SpeakableTextPresentCheck,ImageContrastCheck" />
 
     <ImageButton
         android:id="@+id/character_findRoom"
         android:layout_width="50dp"
         android:layout_height="250dp"
-        android:layout_marginTop="10dp"
         android:background="@color/transparent"
         android:scaleType="centerInside"
         android:src="@drawable/findroom"
         app:layout_constraintStart_toEndOf="@+id/character_enterRoom"
-        app:layout_constraintTop_toBottomOf="@+id/character_background"
+        app:layout_constraintTop_toTopOf="@+id/character_enterRoom"
         tools:ignore="ContentDescription,SpeakableTextPresentCheck,ImageContrastCheck" />
 
     <ImageButton
         android:id="@+id/character_memory"
         android:layout_width="50dp"
         android:layout_height="250dp"
-        android:layout_marginTop="10dp"
         android:background="@color/transparent"
         android:scaleType="centerInside"
         android:src="@drawable/memories"
         app:layout_constraintStart_toEndOf="@+id/character_findRoom"
-        app:layout_constraintTop_toBottomOf="@+id/character_background"
+        app:layout_constraintTop_toTopOf="@+id/character_findRoom"
         tools:ignore="ContentDescription,SpeakableTextPresentCheck,ImageContrastCheck" />
 
     <LinearLayout
@@ -85,8 +71,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="@+id/character_background"
-        app:layout_constraintStart_toStartOf="@+id/character_background"
+        app:layout_constraintEnd_toEndOf="@+id/character_img"
+        app:layout_constraintStart_toStartOf="@+id/character_img"
         app:layout_constraintTop_toBottomOf="@+id/character_img">
 
         <Button
