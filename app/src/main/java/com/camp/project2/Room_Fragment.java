@@ -57,7 +57,7 @@ public class Room_Fragment extends Fragment {
         adapter = new Room_RecyclerAdapter(mList);
         playerList.setAdapter(adapter);
 
-        addItem("red", "player1");
+        addItem("blue", "player1");
 
         qrCode.setImageBitmap(qrCodeMaker(text));
 

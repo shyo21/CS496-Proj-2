@@ -45,7 +45,7 @@ public class Result_Fragment extends Fragment {
         setRouletteView(roulette);
         setPlayerListView(playerList);
 
-        addItem("white","player1",100);
+        addItem("red","player1",100);
 
         button.setOnClickListener(view -> setRouletteAction(roulette));
 

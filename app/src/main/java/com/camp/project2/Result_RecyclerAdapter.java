@@ -50,13 +50,27 @@ public class Result_RecyclerAdapter extends RecyclerView.Adapter<Result_Recycler
 
         String dataColor = item.getIconColor();
         switch (dataColor) {
-            case "white" : holder.color.setBackgroundColor(Color.parseColor("#FFFFFFFF"));
-            case "red" : holder.color.setBackgroundColor(Color.parseColor("#c8636b"));
-            case "yellow" : holder.color.setBackgroundColor(Color.parseColor("#dcc770"));
-            case "green" : holder.color.setBackgroundColor(Color.parseColor("#7eb369"));
-            case "blue" : holder.color.setBackgroundColor(Color.parseColor("#628cb9"));
-            case "purple" : holder.color.setBackgroundColor(Color.parseColor("#81bdca"));
-            case "black" : holder.color.setBackgroundColor(Color.parseColor("#A881CA"));
+            case "white" :
+                holder.color.setBackgroundColor(Color.parseColor("#FFFFFFFF"));
+                break;
+            case "red" :
+                holder.color.setBackgroundColor(Color.parseColor("#c8636b"));
+                break;
+            case "yellow" :
+                holder.color.setBackgroundColor(Color.parseColor("#dcc770"));
+                break;
+            case "green" :
+                holder.color.setBackgroundColor(Color.parseColor("#7eb369"));
+                break;
+            case "blue" :
+                holder.color.setBackgroundColor(Color.parseColor("#628cb9"));
+                break;
+            case "purple" :
+                holder.color.setBackgroundColor(Color.parseColor("#81bdca"));
+                break;
+            case "black" :
+                holder.color.setBackgroundColor(Color.parseColor("#A881CA"));
+                break;
         }
     }
 
