@@ -37,8 +37,6 @@ public class Game_Fragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //socketInterface = new SocketInterface(getActivity());
-        //socketInterface.sendtest();
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)

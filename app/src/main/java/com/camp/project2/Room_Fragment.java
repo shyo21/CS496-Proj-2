@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
@@ -24,10 +25,17 @@ import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.journeyapps.barcodescanner.BarcodeEncoder;
 
+import org.json.JSONObject;
+
+import java.net.InterfaceAddress;
 import java.util.ArrayList;
+import java.util.concurrent.locks.AbstractOwnableSynchronizer;
+
+import io.socket.client.Socket;
 
 
 public class Room_Fragment extends Fragment {
+
     public View myView;
     public ImageView qrCode;
     public RecyclerView playerList;
@@ -38,8 +46,9 @@ public class Room_Fragment extends Fragment {
     public LayoutInflater li;
     public ViewGroup vg;
     public Bundle bu;
-    public boolean check = false;
     public ArrayList<Room_PlayerInfo> mList = new ArrayList<>();
+    SocketInterface socketInterface;
+    Socket mysocket;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -61,60 +70,18 @@ public class Room_Fragment extends Fragment {
         startButton = myView.findViewById(R.id.room_startButton);
 
         text = "http://google.com";
-
-        User_Info user_info = new User_Info();
-        /*
-        if(check == false){
-            String color = user_info.getUserColor();
-            System.out.println("color : " + color);
-            String id = user_info.getUserId();
-            addItem(color, id);
-        }*/
         playerList.setLayoutManager(new LinearLayoutManager(getActivity()));
         adapter = new Room_RecyclerAdapter(mList);
         playerList.setAdapter(adapter);
         qrCode.setImageBitmap(qrCodeMaker(text));
 
         startButton.setOnClickListener(view -> {
+            SocketInterface socketInterface = new SocketInterface(getActivity());
+            Socket mysocket =  socketInterface.getInstance();
+            socketInterface.play();
             Intent intent = new Intent(getActivity(), GameActivity.class);
             startActivity(intent);
         });
-
-
-        /*
-        try {
-            System.out.println("소켓 연결 직");
-            URL url = new URL("http://192.249.18.122:443");
-            System.out.println("여기");
-            mysocket = IO.socket(url.toURI());
-            mysocket.connect();
-            mysocket.on("SEND", new Emitter.Listener() {
-                @Override
-                public void call(final Object... args) {
-                    getActivity().runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            try {
-                                JSONObject data = (JSONObject) args[0];
-                                System.out.println(data.getString("message"));
-                                System.out.println("\n");
-                            } catch(Exception e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    });
-                }
-            });
-            JSONObject data = new JSONObject();
-            try {
-                data.put("message", "master");
-                mysocket.emit("SEND", data);
-            }catch(Exception e){
-                e.printStackTrace();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }*/
         return myView;
     }
 
@@ -129,10 +96,11 @@ public class Room_Fragment extends Fragment {
         playerList.setAdapter(adapter);
     }
 
+    /*
     public void refresh(){
         this.onCreateView(li, vg, bu);
         this.check = false;
-    }
+    }*/
 
     private Bitmap qrCodeMaker(String url) {
         Bitmap qrcode = null;
@@ -151,4 +119,5 @@ public class Room_Fragment extends Fragment {
 
         return qrcode;
     }
+
 }
