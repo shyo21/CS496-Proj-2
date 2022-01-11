@@ -25,7 +25,8 @@ public class Result_Fragment extends Fragment {
     RecyclerView roulette;
     RecyclerView playerList;
     Button button;
-    public ArrayList<Result_PlayerInfo> mList;
+    public ArrayList<Result_PlayerInfo> resultPlayer = new ArrayList<>();
+    public ArrayList<String> resultRoulette = new ArrayList<>();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -54,7 +55,7 @@ public class Result_Fragment extends Fragment {
     private void setPlayerListView(RecyclerView playerList) {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(myView.getContext());
         playerList.setLayoutManager(linearLayoutManager);
-        Result_RecyclerAdapter adapter = new Result_RecyclerAdapter(mList);
+        Result_RecyclerAdapter adapter = new Result_RecyclerAdapter(resultPlayer);
         playerList.setAdapter(adapter);
         LinearSnapHelper linearSnapHelper = new LinearSnapHelper();
         linearSnapHelper.attachToRecyclerView(playerList);
@@ -66,20 +67,19 @@ public class Result_Fragment extends Fragment {
         item.setUserName(name);
         item.setUserScore(score);
 
-        mList.add(item);
+        resultPlayer.add(item);
     }
 
     private void setRouletteView(RecyclerView roulette) {
-        ArrayList<String> list = new ArrayList<>();
         for (int i = 0; i < 100; i++) {
-            list.add(i, String.format("TEXT %d", i));
+            resultRoulette.add(i, String.format("TEXT %d", i));
         }
-        Collections.shuffle(list);
+        Collections.shuffle(resultRoulette);
 
         roulette.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(myView.getContext());
         roulette.setLayoutManager(linearLayoutManager);
-        Roulette_RecyclerAdapter adapter = new Roulette_RecyclerAdapter(list);
+        Roulette_RecyclerAdapter adapter = new Roulette_RecyclerAdapter(resultRoulette);
         roulette.setAdapter(adapter);
         LinearSnapHelper linearSnapHelper = new LinearSnapHelper();
         linearSnapHelper.attachToRecyclerView(roulette);
@@ -96,7 +96,7 @@ public class Result_Fragment extends Fragment {
 
     private CountDownTimer recursiveTimer(RecyclerView roulette, Integer duration, Integer interval) {
         LinearLayoutManager linearLayoutManager = (LinearLayoutManager) roulette.getLayoutManager();
-        Room_RecyclerAdapter adapter = (Room_RecyclerAdapter) roulette.getAdapter();
+        Roulette_RecyclerAdapter adapter = (Roulette_RecyclerAdapter) roulette.getAdapter();
         if(duration == 2000) { duration -= 1000; }
 
         if (interval <= 400) {
