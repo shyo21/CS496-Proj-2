@@ -5,8 +5,6 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.PowerManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,8 +28,8 @@ import io.socket.client.Socket;
 public class Character_Fragment extends Fragment implements View.OnClickListener {
     private final String TAG = "CharacterScreenLog";
     private ImageButton make_room;
+    private ImageButton enter_room;
     private ImageButton find_room;
-    private ImageButton memory;
     private Button red_button;
     private Button yellow_button;
     private Button green_button;
@@ -58,9 +56,9 @@ public class Character_Fragment extends Fragment implements View.OnClickListener
         System.out.println("here");
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_character, container, false);
         make_room = rootView.findViewById(R.id.character_makeRoom);
+        enter_room = rootView.findViewById(R.id.character_enterRoom);
         find_room = rootView.findViewById(R.id.character_findRoom);
-        memory = rootView.findViewById(R.id.character_memory);
-        find_room.setOnClickListener(this);
+        enter_room.setOnClickListener(this);
         characterview = rootView.findViewById(R.id.character_img);
         red_button = rootView.findViewById(R.id.red_button);
         red_button.setOnClickListener(this);
@@ -132,7 +130,7 @@ public class Character_Fragment extends Fragment implements View.OnClickListener
             }
         });
 
-        find_room.setOnClickListener(view -> {
+        enter_room.setOnClickListener(view -> {
             socketInterface = new SocketInterface(getActivity());
             Socket mysocket = socketInterface.getInstance();
             socketInterface.joinroom();
@@ -141,7 +139,7 @@ public class Character_Fragment extends Fragment implements View.OnClickListener
             activity.viewPager.setCurrentItem(1, true);
         });
 
-        memory.setOnClickListener(view -> {
+        find_room.setOnClickListener(view -> {
             user_info.setUserColor(color);
             Intent intent = new Intent(getActivity(),qrScanActivity.class);
             startActivity(intent);

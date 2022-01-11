@@ -1,5 +1,6 @@
 package com.camp.project2;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -56,6 +57,7 @@ public class Room_Fragment extends Fragment {
 
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -87,7 +89,7 @@ public class Room_Fragment extends Fragment {
         Room_PlayerInfo item = new Room_PlayerInfo();
         item.setIconColor(color);
         item.setUserName(name);
-        System.out.println("125 : " + color);
+
         mList.add(item);
         System.out.println("127 : " + item.getIconColor());
         adapter = new Room_RecyclerAdapter(mList);

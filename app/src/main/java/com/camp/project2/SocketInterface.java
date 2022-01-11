@@ -127,6 +127,17 @@ public class SocketInterface{
         }
     }
 
+    public void arrangement(){
+        JSONObject data = new JSONObject();
+        try{
+            JSONArray test = new JSONArray();
+            data.put("array", test);
+            mysocket.emit("ARRANGEMENT",data);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
     public void result(){
         JSONObject data = new JSONObject();
         //try{

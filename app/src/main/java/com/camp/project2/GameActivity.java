@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import io.socket.client.Socket;
@@ -22,7 +23,7 @@ public class GameActivity extends AppCompatActivity implements Game_Fragment.onC
     public Result_Fragment r_screen;
     public Handler timerHandler;
     public Thread timerThread;
-    public int time = 30;
+    public int time = 5;
     public Activity act;
     public SocketInterface socketInterface;
     public Socket mysocket;
@@ -77,17 +78,13 @@ public class GameActivity extends AppCompatActivity implements Game_Fragment.onC
                 }
                 g_screen.timeEnded = true;
 
-                /*mysocket.on("SCORE", args->runOnUiThread(() -> {
+                socketInterface.arrangement();
+                mysocket.on("ARRANGEMENT", args->runOnUiThread(() -> {
                     try {
-                        JSONObject data = (JSONObject) args[0];
-                        System.out.println(data.getString("userid"));
-                        data.info
-
-
-
-
-
-
+                        JSONObject data = (JSONObject)args[0];
+                        JSONArray a = data.getJSONArray("array");
+                        System.out.println(a);
+                        System.out.println("여기여ㅣㄱ 이건가 ?");
 
 
 
@@ -95,7 +92,6 @@ public class GameActivity extends AppCompatActivity implements Game_Fragment.onC
                         e.printStackTrace();
                     }
                 }));
-                    */
 
 
 

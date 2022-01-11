@@ -45,9 +45,7 @@ public class Room_RecyclerAdapter extends RecyclerView.Adapter<Room_RecyclerAdap
     public void onBindViewHolder(ViewHolder holder, int position) {
         Room_PlayerInfo item = mData.get(position);
         holder.name.setText(item.getUserName());
-
-        String dataColor = item.getIconColor();
-        switch (dataColor) {
+        switch (item.getIconColor()) {
             case "white" :
                 holder.color.setBackgroundColor(Color.parseColor("#FFFFFFFF"));
                 break;
