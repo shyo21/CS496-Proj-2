@@ -43,7 +43,9 @@ public class Character_Fragment extends Fragment implements View.OnClickListener
     public String room_number = null;
     public String address = null;
     public int a = 0;
-    RoomActivity activity;
+    public String color = "white";
+    public RoomActivity activity;
+    public User_Info user_info = new User_Info();
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,6 +76,8 @@ public class Character_Fragment extends Fragment implements View.OnClickListener
         black_button.setOnClickListener(this);
 
         make_room.setOnClickListener(view -> {
+            user_info.setUserColor(color);
+            activity.r_screen.addItem((color), user_info.getUserId());
             int position = activity.viewPager.getCurrentItem();
             if (position == 0) {
                 socketInterface = new SocketInterface(getActivity());
@@ -187,6 +191,7 @@ public class Character_Fragment extends Fragment implements View.OnClickListener
         });
 
         memory.setOnClickListener(view -> {
+            user_info.setUserColor(color);
             Intent intent = new Intent(getActivity(),qrScanActivity.class);
             startActivity(intent);
         });
@@ -197,32 +202,29 @@ public class Character_Fragment extends Fragment implements View.OnClickListener
     @SuppressLint("NonConstantResourceId")
     @Override
     public void onClick(View view){
-        User_Info userinfo = new User_Info();
         switch (view.getId()){
             case R.id.red_button:
-                userinfo.setUserColor("red");
-                System.out.println("red");
+                color = "red";
                 characterview.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.red));
                 break;
             case R.id.yellow_button:
-                userinfo.setUserColor("yellow");
-                System.out.println("yellow");
+                color = "yellow";
                 characterview.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.yellow));
                 break;
             case R.id.green_button:
-                userinfo.setUserColor("green");
+                color = "green";
                 characterview.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.green));
                 break;
             case R.id.blue_button:
-                userinfo.setUserColor("blue");
+                color = "blue";
                 characterview.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.blue));
                 break;
             case R.id.purple_button:
-                userinfo.setUserColor("purple");
+                color = "purple";
                 characterview.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.sky_blue));
                 break;
             case R.id.black_button:
-                userinfo.setUserColor("black");
+                color = "black";
                 characterview.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.purple));
                 break;
         }

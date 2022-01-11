@@ -60,17 +60,17 @@ public class Room_Fragment extends Fragment {
 
         text = "http://google.com";
 
+        User_Info user_info = new User_Info();
+        /*
+        if(check == false){
+            String color = user_info.getUserColor();
+            System.out.println("color : " + color);
+            String id = user_info.getUserId();
+            addItem(color, id);
+        }*/
         playerList.setLayoutManager(new LinearLayoutManager(getActivity()));
         adapter = new Room_RecyclerAdapter(mList);
         playerList.setAdapter(adapter);
-
-        User_Info user_info = new User_Info();
-        if(check == false){
-            String color = user_info.getUserColor();
-            String id = user_info.getUserId();
-            addItem(color, id);
-        }
-
         qrCode.setImageBitmap(qrCodeMaker(text));
 
         startButton.setOnClickListener(view -> {
@@ -120,12 +120,16 @@ public class Room_Fragment extends Fragment {
         Room_PlayerInfo item = new Room_PlayerInfo();
         item.setIconColor(color);
         item.setUserName(name);
-
+        System.out.println("125 : " + color);
         mList.add(item);
+        System.out.println("127 : " + item.getIconColor());
+        adapter = new Room_RecyclerAdapter(mList);
+        playerList.setAdapter(adapter);
     }
 
     public void refresh(){
         this.onCreateView(li, vg, bu);
+        this.check = false;
     }
 
     private Bitmap qrCodeMaker(String url) {
