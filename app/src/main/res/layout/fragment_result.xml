@@ -20,19 +20,23 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/result_roulette"
         android:layout_width="275dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="110dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="50dp"
         android:nestedScrollingEnabled="false"
         app:layout_constraintEnd_toEndOf="@+id/result_playerList"
         app:layout_constraintStart_toStartOf="@+id/result_playerList"
         app:layout_constraintTop_toBottomOf="@+id/result_playerList" />
 
-    <Button
+    <ImageButton
         android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:text="Button"
+        android:layout_width="180dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/transparent"
+        android:scaleType="centerInside"
+        android:src="@drawable/spin"
+        app:layout_constraintEnd_toEndOf="@+id/result_roulette"
         app:layout_constraintStart_toStartOf="@+id/result_roulette"
-        app:layout_constraintTop_toBottomOf="@+id/result_roulette" />
+        app:layout_constraintTop_toBottomOf="@+id/result_roulette"
+        tools:ignore="ContentDescription" />
 </androidx.constraintlayout.widget.ConstraintLayout>

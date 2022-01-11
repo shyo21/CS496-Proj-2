@@ -45,6 +45,18 @@
         tools:ignore="ContentDescription,SpeakableTextPresentCheck,ImageContrastCheck" />
 
     <ImageButton
+        android:id="@+id/character_enterRoom"
+        android:layout_width="50dp"
+        android:layout_height="250dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/transparent"
+        android:scaleType="centerInside"
+        android:src="@drawable/enterroom"
+        app:layout_constraintLeft_toRightOf="@+id/character_makeRoom"
+        app:layout_constraintTop_toBottomOf="@+id/character_background"
+        tools:ignore="ContentDescription,SpeakableTextPresentCheck,ImageContrastCheck" />
+
+    <ImageButton
         android:id="@+id/character_findRoom"
         android:layout_width="50dp"
         android:layout_height="250dp"
@@ -52,7 +64,7 @@
         android:background="@color/transparent"
         android:scaleType="centerInside"
         android:src="@drawable/findroom"
-        app:layout_constraintLeft_toRightOf="@+id/character_makeRoom"
+        app:layout_constraintStart_toEndOf="@+id/character_enterRoom"
         app:layout_constraintTop_toBottomOf="@+id/character_background"
         tools:ignore="ContentDescription,SpeakableTextPresentCheck,ImageContrastCheck" />
 

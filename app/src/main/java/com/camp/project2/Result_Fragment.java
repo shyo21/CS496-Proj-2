@@ -8,6 +8,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -24,9 +25,9 @@ public class Result_Fragment extends Fragment {
     View myView;
     RecyclerView roulette;
     RecyclerView playerList;
-    Button button;
+    ImageButton button;
     public ArrayList<Result_PlayerInfo> resultPlayer = new ArrayList<>();
-    public ArrayList<String> resultRoulette = new ArrayList<>();
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -42,7 +43,8 @@ public class Result_Fragment extends Fragment {
         roulette = myView.findViewById(R.id.result_roulette);
         button = myView.findViewById(R.id.button);
 
-        setRouletteView(roulette);
+        ArrayList<String> resultRoulette = new ArrayList<>();
+        setRouletteView(roulette, resultRoulette);
         setPlayerListView(playerList);
 
         addItem("red","player1",100);
@@ -70,16 +72,11 @@ public class Result_Fragment extends Fragment {
         resultPlayer.add(item);
     }
 
-    private void setRouletteView(RecyclerView roulette) {
-        for (int i = 0; i < 100; i++) {
-            resultRoulette.add(i, String.format("TEXT %d", i));
-        }
-        Collections.shuffle(resultRoulette);
-
+    private void setRouletteView(RecyclerView roulette, ArrayList<String> list) {
         roulette.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(myView.getContext());
         roulette.setLayoutManager(linearLayoutManager);
-        Roulette_RecyclerAdapter adapter = new Roulette_RecyclerAdapter(resultRoulette);
+        Roulette_RecyclerAdapter adapter = new Roulette_RecyclerAdapter(setRouletteContents(list));
         roulette.setAdapter(adapter);
         LinearSnapHelper linearSnapHelper = new LinearSnapHelper();
         linearSnapHelper.attachToRecyclerView(roulette);
@@ -92,6 +89,22 @@ public class Result_Fragment extends Fragment {
 
     private void setRouletteAction(RecyclerView roulette) {
         recursiveTimer(roulette,2000,30).start();
+    }
+
+    private ArrayList<String> setRouletteContents(ArrayList<String> list) {
+        ArrayList<String> returnList = new ArrayList<>();
+
+        list.add("병샷");
+        list.add("앞구르기 한바퀴");
+        list.add("딱밤한대");
+        list.add("뭐하지");
+
+        for (int i = 0; i < 100; i++){
+            returnList.addAll(list);
+        }
+
+        Collections.shuffle(returnList);
+        return returnList;
     }
 
     private CountDownTimer recursiveTimer(RecyclerView roulette, Integer duration, Integer interval) {

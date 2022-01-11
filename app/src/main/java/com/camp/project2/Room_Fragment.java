@@ -1,5 +1,6 @@
 package com.camp.project2;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -47,6 +48,7 @@ public class Room_Fragment extends Fragment {
 
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -60,16 +62,18 @@ public class Room_Fragment extends Fragment {
 
         text = "http://google.com";
 
-        playerList.setLayoutManager(new LinearLayoutManager(getActivity()));
-        adapter = new Room_RecyclerAdapter(mList);
-        playerList.setAdapter(adapter);
-
-        User_Info user_info = new User_Info();
-        if(check == false){
-            String color = user_info.getUserColor();
-            String id = user_info.getUserId();
+        if(!check){
+            String color = userinfo.getUserColor();
+            String id = userinfo.getUserId();
             addItem(color, id);
         }
+
+        addItem("red","shyo");
+
+        playerList.setLayoutManager(new LinearLayoutManager(getActivity()));
+        adapter = new Room_RecyclerAdapter(mList);
+        adapter.notifyDataSetChanged();
+        playerList.setAdapter(adapter);
 
         qrCode.setImageBitmap(qrCodeMaker(text));
 
