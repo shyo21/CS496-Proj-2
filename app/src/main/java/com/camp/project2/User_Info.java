@@ -4,16 +4,9 @@ public class User_Info {
     private static String userId = null;
     private static boolean login_check = false;
     private static int score = 0;
-    private static String roomUrl = null;
     private static String userColor = "white";
 
     public User_Info(){ }
-
-    public void setRoomUrl(String url){
-        if(roomUrl == null){
-            roomUrl = url;
-        }
-    }
 
     public void setscore(int user_score){
         score = user_score;
@@ -30,9 +23,6 @@ public class User_Info {
 
     public String getUserId(){
         return userId;
-    }
-    public String getRoomUrl(){
-        return roomUrl;
     }
     public String getUserColor() {return userColor;}
     public int getScore(){return score;}
