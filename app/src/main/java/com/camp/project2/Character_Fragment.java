@@ -1,6 +1,7 @@
 package com.camp.project2;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -12,40 +13,25 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.journeyapps.barcodescanner.BarcodeEncoder;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.io.IOException;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.List;
-
 import io.socket.client.Socket;
-import okhttp3.ResponseBody;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
 
 public class Character_Fragment extends Fragment implements View.OnClickListener {
     private final String TAG = "CharacterScreenLog";
     private ImageButton make_room;
     private ImageButton find_room;
+    private ImageButton memory;
     private Button red_button;
     private Button yellow_button;
     private Button green_button;
@@ -71,6 +57,7 @@ public class Character_Fragment extends Fragment implements View.OnClickListener
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_character, container, false);
         make_room = rootView.findViewById(R.id.character_makeRoom);
         find_room = rootView.findViewById(R.id.character_findRoom);
+        memory = rootView.findViewById(R.id.character_memory);
         find_room.setOnClickListener(this);
         characterview = rootView.findViewById(R.id.character_img);
         red_button = rootView.findViewById(R.id.red_button);
@@ -100,6 +87,36 @@ public class Character_Fragment extends Fragment implements View.OnClickListener
                         address = "http://192.249.18.122:443/" + "room" + room_number;
                         activity.r_screen.text = address;
                         activity.r_screen.qrCode.setImageBitmap(qrCodeMaker(address));
+                        /*
+                        Retrofit retrofit = new RetrofitClient().getClient();
+                        RetrofitService myInterface = retrofit.create(RetrofitService.class);
+                        Call<ResponseBody> call_post = myInterface.logIn(s_id, s_pwd);
+
+
+                        call_post.enqueue(new Callback<ResponseBody>() {
+                            @Override
+                            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                                if (response.isSuccessful()) {
+                                    try {
+                                        String result = response.body().string();
+                                        Log.v(TAG, "result = " + result);
+                                        Toast.makeText(getActivity().getApplicationContext(), result, Toast.LENGTH_SHORT).show();
+                                    } catch (IOException e) {
+                                        e.printStackTrace();
+                                    }
+
+                                } else {
+                                    Log.v(TAG, "error = " + String.valueOf(response.code()));
+                                    Toast.makeText(getActivity().getApplicationContext(), "error = " + String.valueOf(response.code()), Toast.LENGTH_SHORT).show();
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                                Log.v(TAG, "Fail");
+                                Toast.makeText(getActivity().getApplicationContext(), "Response Fail", Toast.LENGTH_SHORT).show();
+                            }
+                        });*/
 
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -168,6 +185,12 @@ public class Character_Fragment extends Fragment implements View.OnClickListener
 
             activity.viewPager.setCurrentItem(1, true);
         });
+
+        memory.setOnClickListener(view -> {
+            Intent intent = new Intent(getActivity(),qrScanActivity.class);
+            startActivity(intent);
+        });
+
         return rootView;
     }
 

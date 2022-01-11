@@ -145,25 +145,4 @@ public class Room_Fragment extends Fragment {
 
         return qrcode;
     }
-
-    private ArrayList<Integer> getDisplaySize() {
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-        ArrayList<Integer> displaySize = new ArrayList<>();
-        requireActivity().getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-        displaySize.add(0, displayMetrics.widthPixels);
-        displaySize.add(1, displayMetrics.heightPixels);
-        return displaySize;
-    }
-
-    private Integer pixel_to_dp (int pixel) {
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-        requireActivity().getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-        return pixel / displayMetrics.densityDpi;
-    }
-
-    private Integer dp_to_pixel (int dp) {
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-        requireActivity().getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-        return dp * displayMetrics.densityDpi;
-    }
 }

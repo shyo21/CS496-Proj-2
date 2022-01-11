@@ -13,7 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class GameActivity extends AppCompatActivity implements Game_Fragment.onClickScore {
 
-    public MyViewPager viewPager;
+    private MyViewPager viewPager;
     public Game_Fragment g_screen;
     public Result_Fragment r_screen;
     public Handler timerHandler;
@@ -34,7 +34,7 @@ public class GameActivity extends AppCompatActivity implements Game_Fragment.onC
         g_screen = new Game_Fragment();
         r_screen = new Result_Fragment();
 
-        viewPager = findViewById(R.id.roomActivity_viewpager);
+        viewPager = findViewById(R.id.gameActivity_viewpager);
         viewPager.setPagingEnabled(false);
         ViewpagerAdapter viewpagerAdapter = new ViewpagerAdapter(getSupportFragmentManager());
         viewpagerAdapter.addItem(g_screen);

@@ -23,7 +23,10 @@ public class Result_Fragment extends Fragment {
 
     View myView;
     RecyclerView roulette;
+    RecyclerView playerList;
     Button button;
+    public ArrayList<Result_PlayerInfo> resultPlayer = new ArrayList<>();
+    public ArrayList<String> resultRoulette = new ArrayList<>();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -35,27 +38,49 @@ public class Result_Fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         myView = inflater.inflate(R.layout.fragment_result, container, false);
-        roulette = myView.findViewById(R.id.roulette);
+        playerList = myView.findViewById(R.id.result_playerList);
+        roulette = myView.findViewById(R.id.result_roulette);
         button = myView.findViewById(R.id.button);
 
         setRouletteView(roulette);
+        setPlayerListView(playerList);
+
+        addItem("red","player1",100);
+
         button.setOnClickListener(view -> setRouletteAction(roulette));
 
         return myView;
     }
 
+    private void setPlayerListView(RecyclerView playerList) {
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(myView.getContext());
+        playerList.setLayoutManager(linearLayoutManager);
+        Result_RecyclerAdapter adapter = new Result_RecyclerAdapter(resultPlayer);
+        playerList.setAdapter(adapter);
+        LinearSnapHelper linearSnapHelper = new LinearSnapHelper();
+        linearSnapHelper.attachToRecyclerView(playerList);
+    }
+
+    private void addItem(String color, String name, Integer score) {
+        Result_PlayerInfo item = new Result_PlayerInfo();
+        item.setIconColor(color);
+        item.setUserName(name);
+        item.setUserScore(score);
+
+        resultPlayer.add(item);
+    }
+
     private void setRouletteView(RecyclerView roulette) {
-        ArrayList<String> list = new ArrayList<>();
         for (int i = 0; i < 100; i++) {
-            list.add(i, String.format("TEXT %d", i));
+            resultRoulette.add(i, String.format("TEXT %d", i));
         }
-        Collections.shuffle(list);
+        Collections.shuffle(resultRoulette);
 
         roulette.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(myView.getContext());
         roulette.setLayoutManager(linearLayoutManager);
-        //recyclerAdapter adapter = new recyclerAdapter(list);
-        //roulette.setAdapter(adapter);
+        Roulette_RecyclerAdapter adapter = new Roulette_RecyclerAdapter(resultRoulette);
+        roulette.setAdapter(adapter);
         LinearSnapHelper linearSnapHelper = new LinearSnapHelper();
         linearSnapHelper.attachToRecyclerView(roulette);
 
@@ -71,7 +96,7 @@ public class Result_Fragment extends Fragment {
 
     private CountDownTimer recursiveTimer(RecyclerView roulette, Integer duration, Integer interval) {
         LinearLayoutManager linearLayoutManager = (LinearLayoutManager) roulette.getLayoutManager();
-        Room_RecyclerAdapter adapter = (Room_RecyclerAdapter) roulette.getAdapter();
+        Roulette_RecyclerAdapter adapter = (Roulette_RecyclerAdapter) roulette.getAdapter();
         if(duration == 2000) { duration -= 1000; }
 
         if (interval <= 400) {
