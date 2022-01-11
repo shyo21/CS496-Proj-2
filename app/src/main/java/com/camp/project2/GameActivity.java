@@ -75,6 +75,8 @@ public class GameActivity extends AppCompatActivity implements Game_Fragment.onC
                     socketInterface = new SocketInterface(act);
                     mysocket = socketInterface.getInstance();
                     socketInterface.score();
+                    int score = user_info.getScore();
+                    r_screen.addItem(user_info.getUserColor(),user_info.getUserId(),score);
                 }
                 g_screen.timeEnded = true;
 

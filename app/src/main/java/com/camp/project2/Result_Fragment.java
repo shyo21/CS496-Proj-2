@@ -47,8 +47,6 @@ public class Result_Fragment extends Fragment {
         setRouletteView(roulette, resultRoulette);
         setPlayerListView(playerList);
 
-        addItem("red","player1",100);
-
         button.setOnClickListener(view -> setRouletteAction(roulette));
 
         return myView;
@@ -58,18 +56,22 @@ public class Result_Fragment extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(myView.getContext());
         playerList.setLayoutManager(linearLayoutManager);
         Result_RecyclerAdapter adapter = new Result_RecyclerAdapter(resultPlayer);
+
         playerList.setAdapter(adapter);
         LinearSnapHelper linearSnapHelper = new LinearSnapHelper();
         linearSnapHelper.attachToRecyclerView(playerList);
     }
 
-    private void addItem(String color, String name, Integer score) {
+    public void addItem(String color, String name, Integer score) {
         Result_PlayerInfo item = new Result_PlayerInfo();
         item.setIconColor(color);
         item.setUserName(name);
         item.setUserScore(score);
 
         resultPlayer.add(item);
+
+        Result_RecyclerAdapter adapter = new Result_RecyclerAdapter(resultPlayer);
+        playerList.setAdapter(adapter);
     }
 
     private void setRouletteView(RecyclerView roulette, ArrayList<String> list) {
